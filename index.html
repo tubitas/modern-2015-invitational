@@ -220,8 +220,8 @@
 
   /* simulador */
   .sim-controles{display:flex;align-items:center;gap:18px 28px;flex-wrap:wrap;margin-bottom:30px}
-  .boton-sim{font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:15px;color:var(--oro-claro);background:none;border:1px solid var(--oro);padding:14px 26px;cursor:pointer;transition:background .18s ease,color .18s ease}
-  .boton-sim:hover{background:var(--oro);color:var(--tinta)}
+  .boton-sim{font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:16px;color:var(--tinta);background:var(--oro);border:1px solid var(--oro-claro);padding:16px 30px;cursor:pointer;box-shadow:0 10px 30px rgba(200,164,76,.18);transition:background .18s ease,transform .18s ease}
+  .boton-sim:hover{background:var(--oro-claro);transform:translateY(-1px)}
   .sim-rondas{display:inline-flex;align-items:center;gap:8px;font-family:var(--util);letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--pergamino-2)}
   .sim-rondas button{font:inherit;color:var(--pergamino-2);background:none;border:1px solid var(--linea);padding:6px 11px;cursor:pointer}
   .sim-rondas button[aria-pressed="true"]{color:var(--tinta);background:var(--oro);border-color:var(--oro)}
@@ -373,7 +373,7 @@
       <h2>Tu camino a la final</h2>
       <p>Así sería el día de quien llega a la final: un mazo distinto en cada ronda, sorteado, y enfrente otro que tampoco ha elegido nadie. Pulsa y mira qué te habría tocado. Cada vez sale un camino distinto.</p>
     </div>
-    <div class="sim-controles rev">
+    <div class="sim-controles">
       <button class="boton-sim" type="button" id="sim-sortear">Sortear mi camino</button>
       <div class="sim-rondas" role="group" aria-label="Rondas suizas">
         <span>Rondas suizas</span>
@@ -454,7 +454,7 @@
       <p>Rondas suizas y Top 8, al mejor de tres partidas, con mazo nuevo en cada ronda. Todos juegan todas las rondas suizas, se gane o se pierda.</p>
     </div>
     <ol class="agenda rev">
-      <li><span class="hora">17:00</span><span class="que">Recepción</span><span class="det">Acreditaciones y sorteo del primer mazo</span></li>
+      <li><span class="hora">17:00</span><span class="que">Recepción</span><span class="det">Inscripción y sorteo del primer mazo</span></li>
       <li><span class="hora"></span><span class="que">Rondas suizas</span><span class="det">Al mejor de tres, mazo nuevo en cada ronda</span></li>
       <li class="hito"><span class="hora"></span><span class="que">Corte al Top 8</span><span class="det">Los ocho primeros de la clasificación</span></li>
       <li><span class="hora"></span><span class="que">Cuartos, semifinales y final</span><span class="det">Eliminación directa, al mejor de tres, en directo</span></li>
@@ -467,7 +467,7 @@
           <li>El mazo se sortea al empezar cada ronda y se devuelve con su ficha al terminar. Se juega tal cual viene, sin cambiar cartas.</li>
           <li>Cada ronda se juega al mejor de tres partidas. Quien gana la ronda suma 3 puntos; si se empata, 1 cada uno.</li>
           <li>En las rondas suizas nadie queda eliminado. Al acabarlas, los ocho primeros pasan al Top 8, que es a eliminación directa.</li>
-          <li>Las horas de cada ronda las marca la organización el mismo día. A las 17:00 tienen que estar todos acreditados.</li>
+          <li>Las horas de cada ronda las marca la organización el mismo día. A las 17:00 tienen que estar todos en la tienda.</li>
           <li>El Top 8 se retransmite en directo. Al reservar la plaza se pide el permiso para salir en cámara.</li>
           <li>Los premios son en material de tienda: 30 % para el campeón, 20 % para el segundo, 12,5 % para los semifinalistas y 6,25 % del quinto al octavo.</li>
         </ul>
@@ -510,12 +510,6 @@
           <div class="cuerpo">
             <h3>Moneda conmemorativa</h3>
             <p>Zamak con acabado en oro antiguo, 40 mm y alto relieve por las dos caras. Una para cada uno de los veinte jugadores, se gane o se pierda.</p>
-          </div>
-        </div>
-        <div class="pieza">
-          <div class="cuerpo">
-            <h3>Acreditación con tu nombre</h3>
-            <p>Tarjeta y cordón con el nombre y el número de mesa, para llevarla puesta todo el día.</p>
           </div>
         </div>
       </div>
