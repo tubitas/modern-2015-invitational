@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Modern 2015 Invitational</title>
+<meta name="description" content="Torneo de Magic en Cartinha Brilhante (Almería), sábado 19 de septiembre a las 17:00. Veinte mazos del Modern de 2015 sorteados en cada ronda, con la ficha de cada uno. 20 plazas, 10 €.">
+<meta property="og:title" content="Modern 2015 Invitational">
+<meta property="og:description" content="Sábado 19 de septiembre, 17:00, Cartinha Brilhante (Almería). Veinte mazos del Modern de 2015 sorteados en cada ronda. 20 plazas, 10 €.">
+<meta property="og:image" content="https://tubitas.github.io/modern-2015-invitational/img/cartel.webp">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A0908">
+<link rel="icon" href="img/emblema.jpg">
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Barlow+Condensed:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --tinta:#0A0908;
+    --tinta-2:#12100C;
+    --tinta-3:#1A1710;
+    --oro:#C8A44C;
+    --oro-claro:#E8D6A6;
+    --oro-tenue:#8A7340;
+    --pergamino:#E6DCC6;
+    --pergamino-2:#A99C80;
+    --brasa:#B4472A;
+    --linea:rgba(200,164,76,.28);
+    --linea-suave:rgba(200,164,76,.14);
+    --w:#F0E4C4; --u:#4B86BE; --b:#7A6784; --r:#C04A2E; --g:#4F8B52; --c:#A9A093;
+    --serif:"EB Garamond",Georgia,"Times New Roman",serif;
+    --display:"Cinzel","Trajan Pro",Georgia,serif;
+    --util:"Barlow Condensed","Helvetica Neue",Arial,sans-serif;
+    --sombra:0 18px 50px rgba(10,9,8,.75);
+    --max:1080px;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--tinta);
+    background-image:
+      radial-gradient(ellipse 90% 60% at 50% -10%, rgba(200,164,76,.13), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(180,71,42,.06), transparent 70%);
+    background-attachment:fixed;
+    color:var(--pergamino);
+    font-family:var(--serif);
+    font-size:18px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .envoltorio{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  .borrador{
+    background:var(--tinta-3);
+    border-bottom:1px solid var(--linea);
+    color:var(--pergamino-2);
+    font-family:var(--util);
+    font-size:14px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    text-align:center;
+    padding:9px 16px;
+  }
+  .borrador strong{color:var(--oro);font-weight:600}
+
+  h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0}
+  h2{font-size:clamp(1.5rem,3.4vw,2.1rem);color:var(--oro-claro);letter-spacing:.04em;text-transform:uppercase}
+  h3{font-size:1.02rem;color:var(--oro-claro);letter-spacing:.06em;text-transform:uppercase}
+  p{margin:0}
+  a{color:var(--oro-claro)}
+  :focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+
+  .eyebrow{font-family:var(--util);font-size:14px;letter-spacing:.28em;text-transform:uppercase;color:var(--oro-tenue)}
+
+  section{padding:clamp(48px,7vw,84px) 0;border-top:1px solid var(--linea-suave)}
+  .cabecera-seccion{display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
+  .cabecera-seccion p{max-width:62ch;color:var(--pergamino-2)}
+
+  /* portada */
+  .portada{border-top:none;display:grid;grid-template-columns:1fr;gap:48px;padding-top:clamp(40px,6vw,72px);align-items:center}
+  @media(min-width:900px){.portada{grid-template-columns:1.05fr .95fr;gap:64px}}
+  .emblema{width:150px;height:auto;display:block;margin-bottom:26px;mix-blend-mode:screen}
+  .portada h1{font-size:clamp(2.6rem,7vw,4.4rem);line-height:.98;letter-spacing:.02em;color:var(--oro-claro);text-shadow:0 2px 30px rgba(200,164,76,.22)}
+  .portada .capitulo{font-family:var(--display);font-size:clamp(1rem,2.2vw,1.25rem);letter-spacing:.22em;text-transform:uppercase;color:var(--oro);margin-top:18px}
+  .lema{font-style:italic;font-size:1.15rem;color:var(--pergamino-2);margin-top:22px;max-width:40ch}
+  .cartel{width:100%;height:auto;display:block;border:1px solid var(--linea);box-shadow:0 24px 70px rgba(10,9,8,.8)}
+
+  /* datos */
+  .datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--linea-suave);border:1px solid var(--linea);margin-top:40px}
+  .dato{background:var(--tinta-2);padding:20px 18px;display:flex;flex-direction:column;gap:6px}
+  .dato .k{font-family:var(--util);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro-tenue)}
+  .dato .v{font-family:var(--display);font-size:1.15rem;color:var(--oro-claro);line-height:1.25}
+  .dato .n{font-size:.86rem;color:var(--pergamino-2);font-style:italic}
+
+  .pendiente{color:var(--brasa);font-family:var(--util);font-size:13px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px dotted var(--brasa)}
+
+  /* el sorteo: lista de términos, no tarjetas */
+  .terminos{display:grid;gap:0;border-top:1px solid var(--linea)}
+  .terminos > div{display:grid;grid-template-columns:1fr;gap:6px;padding:24px 0;border-bottom:1px solid var(--linea-suave)}
+  @media(min-width:760px){.terminos > div{grid-template-columns:260px 1fr;gap:40px;padding:26px 0}}
+  .terminos h3{padding-top:2px}
+  .terminos p{color:var(--pergamino-2);max-width:60ch}
+
+  /* mazos */
+  .mazos{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:1px;background:var(--linea-suave);border:1px solid var(--linea)}
+  .mazo{background:var(--tinta-2);padding:16px 18px;display:flex;flex-direction:column;gap:9px;transition:background .18s ease}
+  .mazo:hover{background:var(--tinta-3)}
+  .mazo .nombre{font-family:var(--display);font-size:1.02rem;color:var(--oro-claro);letter-spacing:.03em}
+  .mazo .tipo{font-family:var(--util);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--pergamino-2)}
+  .pips{display:flex;gap:5px}
+  .pip{width:17px;height:17px;border-radius:50%;border:1px solid rgba(10,9,8,.6);box-shadow:inset 0 1px 2px rgba(255,255,255,.35),0 1px 3px rgba(10,9,8,.6)}
+  .pip.w{background:var(--w)} .pip.u{background:var(--u)} .pip.b{background:var(--b)}
+  .pip.r{background:var(--r)} .pip.g{background:var(--g)} .pip.c{background:var(--c)}
+
+  /* ficha */
+  .ficha{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
+  @media(min-width:820px){.ficha{grid-template-columns:.8fr 1.2fr;gap:56px}}
+  .ficha img{width:100%;max-width:340px;height:auto;display:block;border:1px solid var(--linea);box-shadow:var(--sombra)}
+  .ficha ul{margin:0;padding-left:1.1em;color:var(--pergamino-2);display:flex;flex-direction:column;gap:12px}
+  .ficha li::marker{color:var(--oro-tenue)}
+
+  /* agenda */
+  .agenda{list-style:none;margin:0;padding:0;border-top:1px solid var(--linea)}
+  .agenda li{display:grid;grid-template-columns:74px 1fr;gap:6px 22px;padding:15px 0;border-bottom:1px solid var(--linea-suave);align-items:baseline}
+  @media(min-width:700px){.agenda li{grid-template-columns:92px 200px 1fr;gap:24px}}
+  .agenda .hora{font-family:var(--util);font-size:1.15rem;letter-spacing:.06em;color:var(--oro-claro);font-variant-numeric:tabular-nums}
+  .agenda .que{font-family:var(--display);font-size:1rem;color:var(--pergamino);letter-spacing:.03em}
+  .agenda .det{color:var(--pergamino-2);font-size:.95rem;font-style:italic;grid-column:1/-1}
+  @media(min-width:700px){.agenda .det{grid-column:auto}}
+  .agenda li.hito{border-left:3px solid var(--brasa);padding-left:16px;background:rgba(180,71,42,.06)}
+  @media(min-width:700px){.agenda li.hito{grid-template-columns:76px 200px 1fr}}
+
+  /* tabla */
+  .tabla-envoltorio{border:1px solid var(--linea)}
+  table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+  th:first-child,td.pos{width:70px}
+  th:last-child,td:last-child{width:96px}
+  th,td{text-align:left;padding:13px 18px;border-bottom:1px solid var(--linea-suave)}
+  thead th{font-family:var(--util);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro-tenue);background:var(--tinta-3);border-bottom:1px solid var(--linea)}
+  tbody tr:last-child td{border-bottom:none}
+  td.pos{font-family:var(--util);font-size:1.05rem;color:var(--oro-claro)}
+  tr.corte td.pos{color:var(--oro)}
+  tr.corte td{background:rgba(180,71,42,.07)}
+  td.libre{height:47px}
+
+  /* piezas */
+  .piezas{display:grid;grid-template-columns:1fr;gap:28px}
+  @media(min-width:760px){.piezas{grid-template-columns:1.25fr .75fr}}
+  .pieza{border:1px solid var(--linea);background:var(--tinta-2);display:flex;flex-direction:column}
+  .pieza img{width:100%;height:auto;display:block;border-bottom:1px solid var(--linea-suave)}
+  .pieza .cuerpo{padding:20px;display:flex;flex-direction:column;gap:8px}
+  .pieza p{color:var(--pergamino-2);font-size:.96rem}
+  .apilado{display:grid;gap:28px;align-content:start}
+
+  /* cierre */
+  .cierre{text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px}
+  .precio{font-family:var(--display);font-size:clamp(2.4rem,6vw,3.6rem);color:var(--oro-claro);line-height:1}
+  .plazas{font-family:var(--util);letter-spacing:.24em;text-transform:uppercase;color:var(--oro-tenue);font-size:14px}
+
+  footer{border-top:1px solid var(--linea);padding:40px 0 56px;text-align:center;color:var(--pergamino-2);font-family:var(--util);letter-spacing:.16em;text-transform:uppercase;font-size:13.5px;line-height:2}
+  footer .marca{font-family:var(--display);letter-spacing:.2em;color:var(--oro);font-size:15px;text-transform:uppercase}
+
+
+  /* galería de mazos */
+  .galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:22px 14px}
+  @media(min-width:700px){.galeria{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:26px 18px}}
+  .carta{background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:left;color:inherit;font:inherit;display:flex;flex-direction:column;gap:10px}
+  .carta img{width:100%;height:auto;display:block;border:1px solid var(--linea);box-shadow:0 12px 30px rgba(10,9,8,.7);transition:transform .18s ease}
+  .carta:hover img,.carta:focus-visible img{transform:translateY(-3px)}
+  .carta .pie{display:flex;flex-direction:column;gap:5px}
+  .carta .nombre{font-family:var(--display);font-size:.98rem;color:var(--oro-claro);letter-spacing:.03em;line-height:1.25}
+  .carta .tipo{font-family:var(--util);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pergamino-2)}
+  .ficha-nota{margin-top:44px;padding-top:28px;border-top:1px solid var(--linea-suave);display:grid;gap:10px;max-width:62ch}
+  .ficha-nota p{color:var(--pergamino-2)}
+  dialog.ficha-dialogo{border:1px solid var(--linea);background:var(--tinta-2);color:var(--pergamino);padding:0;width:min(100vw - 20px,984px);max-height:calc(100dvh - 20px);margin:auto;box-shadow:var(--sombra)}
+  dialog.ficha-dialogo::backdrop{background:rgba(10,9,8,.88)}
+  .ficha-barra{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--linea-suave);background:var(--tinta-3)}
+  .ficha-barra .titulo{font-family:var(--display);color:var(--oro-claro);letter-spacing:.04em;font-size:1rem;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ficha-barra .grupo{display:flex;gap:6px;flex-shrink:0}
+  .ficha-cuerpo{overflow:auto;max-height:calc(100dvh - 20px - 54px);-webkit-overflow-scrolling:touch}
+  .ficha-cuerpo img{display:block;width:100%;height:auto}
+  .ficha-cuerpo.ampliada img{width:960px;max-width:none}
+  .util{font-family:var(--util);letter-spacing:.12em;text-transform:uppercase;font-size:12.5px;background:none;border:1px solid var(--linea);color:var(--oro-claro);padding:7px 11px;cursor:pointer;line-height:1}
+  .util:hover{background:var(--tinta-2)}
+  .boton{display:inline-block;font-family:var(--util);letter-spacing:.18em;text-transform:uppercase;font-size:15px;color:var(--tinta);background:var(--oro);padding:14px 26px;text-decoration:none;border:1px solid var(--oro-claro)}
+  .boton:hover{background:var(--oro-claro)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+
+<div class="envoltorio">
+
+  <header class="portada" id="portada">
+    <div>
+      <img class="emblema" src="img/emblema.jpg" alt="Emblema del torneo: un reloj de arena partido dentro de un anillo de piedra">
+      <p class="eyebrow">Jomy Tournaments · Curating Magic Experiences</p>
+      <h1>Modern 2015 Invitational</h1>
+      <p class="capitulo">The Golden Age Returns · Chapter I</p>
+      <p class="lema">Veinte mazos del Modern de 2015. Nadie trae mazo de casa y nadie elige el suyo: cada ronda se sortea.</p>
+    </div>
+    <img class="cartel" src="img/cartel.webp" alt="Cartel del Modern 2015 Invitational con la lista de los veinte mazos">
+  </header>
+
+  <div class="datos">
+    <div class="dato"><span class="k">Fecha</span><span class="v">Sábado 19 de septiembre</span><span class="n">de 2026</span></div>
+    <div class="dato"><span class="k">Hora</span><span class="v">17:00 h</span></div>
+    <div class="dato"><span class="k">Lugar</span><span class="v">Cartinha Brilhante</span><span class="n"><a href="https://maps.google.com/?q=Av.+Federico+Garc%C3%ADa+Lorca+165,+04008+Almer%C3%ADa" target="_blank" rel="noopener">Av. Federico García Lorca 165, Almería</a></span></div>
+    <div class="dato"><span class="k">Plazas</span><span class="v">20 jugadores</span><span class="n">Uno por mazo</span></div>
+    <div class="dato"><span class="k">Inscripción</span><span class="v">10 €</span><span class="n">Mazo incluido</span></div>
+  </div>
+
+  <section id="sorteo">
+    <div class="cabecera-seccion">
+      <h2>El mazo se sortea en cada ronda</h2>
+      <p>Es lo que separa a este torneo de cualquier otro: aquí el mazo no se trae ni se elige.</p>
+    </div>
+    <div class="terminos">
+      <div>
+        <h3>No eliges</h3>
+        <p>Al empezar cada ronda se te asigna un mazo por sorteo. No hay que traer nada ni saberse el formato: el mazo llega a la mesa contigo.</p>
+      </div>
+      <div>
+        <h3>No repites</h3>
+        <p>Ningún jugador juega dos veces el mismo mazo. Al terminar el día habrás llevado uno distinto en cada ronda.</p>
+      </div>
+      <div>
+        <h3>Veinte mazos, veinte jugadores</h3>
+        <p>Hay un mazo por jugador, así que en cada ronda están los veinte sobre la mesa. Nadie sabe de antemano cuál le va a tocar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="mazos">
+    <div class="cabecera-seccion">
+      <h2>Los veinte mazos</h2>
+      <p>Los arquetipos que se jugaban en aquel Modern, montados carta a carta. Cada mazo lleva su ficha en el dorso, con la lista completa y un plan de juego en cinco pasos. Toca cualquiera para verla.</p>
+    </div>
+    <div class="galeria">
+<button class="carta" type="button" data-i="0" aria-label="Ver la ficha de Abzan"><img src="img/abzan-front.webp" alt="Portada del mazo Abzan" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Abzan</span><span class="tipo">Midrange</span><span class="pips" aria-label="Colores: blanco, negro, verde"><span class="pip w" title="blanco"></span><span class="pip b" title="negro"></span><span class="pip g" title="verde"></span></span></span></button>
+<button class="carta" type="button" data-i="1" aria-label="Ver la ficha de Death Cloud"><img src="img/death-cloud-front.webp" alt="Portada del mazo Death Cloud" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Death Cloud</span><span class="tipo">Control</span><span class="pips" aria-label="Colores: negro, verde"><span class="pip b" title="negro"></span><span class="pip g" title="verde"></span></span></span></button>
+<button class="carta" type="button" data-i="2" aria-label="Ver la ficha de Infect"><img src="img/infect-front.webp" alt="Portada del mazo Infect" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Infect</span><span class="tipo">Aggro-Combo</span><span class="pips" aria-label="Colores: negro, verde"><span class="pip b" title="negro"></span><span class="pip g" title="verde"></span></span></span></button>
+<button class="carta" type="button" data-i="3" aria-label="Ver la ficha de Jeskai"><img src="img/jeskai-front.webp" alt="Portada del mazo Jeskai" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Jeskai</span><span class="tipo">Control</span><span class="pips" aria-label="Colores: azul, rojo, blanco"><span class="pip u" title="azul"></span><span class="pip r" title="rojo"></span><span class="pip w" title="blanco"></span></span></span></button>
+<button class="carta" type="button" data-i="4" aria-label="Ver la ficha de Project Melira"><img src="img/melira-front.webp" alt="Portada del mazo Project Melira" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Project Melira</span><span class="tipo">Combo</span><span class="pips" aria-label="Colores: verde, blanco, negro"><span class="pip g" title="verde"></span><span class="pip w" title="blanco"></span><span class="pip b" title="negro"></span></span></span></button>
+<button class="carta" type="button" data-i="5" aria-label="Ver la ficha de PIF Combo"><img src="img/pif-front.webp" alt="Portada del mazo PIF Combo" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">PIF Combo</span><span class="tipo">Combo</span><span class="pips" aria-label="Colores: azul, rojo"><span class="pip u" title="azul"></span><span class="pip r" title="rojo"></span></span></span></button>
+<button class="carta" type="button" data-i="6" aria-label="Ver la ficha de Tezzerator Prison"><img src="img/tezzerator-front.webp" alt="Portada del mazo Tezzerator Prison" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Tezzerator Prison</span><span class="tipo">Control · Artefactos</span><span class="pips" aria-label="Colores: azul, negro"><span class="pip u" title="azul"></span><span class="pip b" title="negro"></span></span></span></button>
+<button class="carta" type="button" data-i="7" aria-label="Ver la ficha de Affinity"><img src="img/affinity-front.webp" alt="Portada del mazo Affinity" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Affinity</span><span class="tipo">Aggro-Combo</span><span class="pips" aria-label="Colores: incoloro, azul, negro"><span class="pip c" title="incoloro"></span><span class="pip u" title="azul"></span><span class="pip b" title="negro"></span></span></span></button>
+<button class="carta" type="button" data-i="8" aria-label="Ver la ficha de Bant Aggro"><img src="img/bant-front.webp" alt="Portada del mazo Bant Aggro" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Bant Aggro</span><span class="tipo">Aggro · Midrange</span><span class="pips" aria-label="Colores: verde, blanco, azul"><span class="pip g" title="verde"></span><span class="pip w" title="blanco"></span><span class="pip u" title="azul"></span></span></span></button>
+<button class="carta" type="button" data-i="9" aria-label="Ver la ficha de Green Tron"><img src="img/tron-front.webp" alt="Portada del mazo Green Tron" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Green Tron</span><span class="tipo">Rampa · Control</span><span class="pips" aria-label="Colores: verde, incoloro"><span class="pip g" title="verde"></span><span class="pip c" title="incoloro"></span></span></span></button>
+<button class="carta" type="button" data-i="10" aria-label="Ver la ficha de Tokens"><img src="img/tokens-front.webp" alt="Portada del mazo Tokens" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Tokens</span><span class="tipo">Go-Wide</span><span class="pips" aria-label="Colores: blanco, negro"><span class="pip w" title="blanco"></span><span class="pip b" title="negro"></span></span></span></button>
+<button class="carta" type="button" data-i="11" aria-label="Ver la ficha de Red Deck Wins"><img src="img/red-deck-wins-front.webp" alt="Portada del mazo Red Deck Wins" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Red Deck Wins</span><span class="tipo">Aggro</span><span class="pips" aria-label="Colores: rojo"><span class="pip r" title="rojo"></span></span></span></button>
+<button class="carta" type="button" data-i="12" aria-label="Ver la ficha de Twin"><img src="img/twin-front.webp" alt="Portada del mazo Twin" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Twin</span><span class="tipo">Combo</span><span class="pips" aria-label="Colores: azul, rojo"><span class="pip u" title="azul"></span><span class="pip r" title="rojo"></span></span></span></button>
+<button class="carta" type="button" data-i="13" aria-label="Ver la ficha de UB Faeries"><img src="img/ub-faeries-front.webp" alt="Portada del mazo UB Faeries" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">UB Faeries</span><span class="tipo">Disrupción</span><span class="pips" aria-label="Colores: azul, negro"><span class="pip u" title="azul"></span><span class="pip b" title="negro"></span></span></span></button>
+<button class="carta" type="button" data-i="14" aria-label="Ver la ficha de Valakut"><img src="img/valakut-front.webp" alt="Portada del mazo Valakut" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Valakut</span><span class="tipo">Rampa</span><span class="pips" aria-label="Colores: rojo, verde"><span class="pip r" title="rojo"></span><span class="pip g" title="verde"></span></span></span></button>
+<button class="carta" type="button" data-i="15" aria-label="Ver la ficha de 5 Colors Zoo"><img src="img/5-colors-zoo-front.webp" alt="Portada del mazo 5 Colors Zoo" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">5 Colors Zoo</span><span class="tipo">Aggro · Midrange</span><span class="pips" aria-label="Colores: blanco, azul, negro, rojo, verde"><span class="pip w" title="blanco"></span><span class="pip u" title="azul"></span><span class="pip b" title="negro"></span><span class="pip r" title="rojo"></span><span class="pip g" title="verde"></span></span></span></button>
+<button class="carta" type="button" data-i="16" aria-label="Ver la ficha de Grixis Shadow"><img src="img/grixis-shadow-front.webp" alt="Portada del mazo Grixis Shadow" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Grixis Shadow</span><span class="tipo">Control · Midrange</span><span class="pips" aria-label="Colores: azul, negro, rojo"><span class="pip u" title="azul"></span><span class="pip b" title="negro"></span><span class="pip r" title="rojo"></span></span></span></button>
+<button class="carta" type="button" data-i="17" aria-label="Ver la ficha de Hatebear"><img src="img/hatebear-front.webp" alt="Portada del mazo Hatebear" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Hatebear</span><span class="tipo">Stax · Control</span><span class="pips" aria-label="Colores: blanco"><span class="pip w" title="blanco"></span></span></span></button>
+<button class="carta" type="button" data-i="18" aria-label="Ver la ficha de Jund"><img src="img/jund-front.webp" alt="Portada del mazo Jund" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Jund</span><span class="tipo">Midrange</span><span class="pips" aria-label="Colores: negro, rojo, verde"><span class="pip b" title="negro"></span><span class="pip r" title="rojo"></span><span class="pip g" title="verde"></span></span></span></button>
+<button class="carta" type="button" data-i="19" aria-label="Ver la ficha de Living End"><img src="img/living-end-front.webp" alt="Portada del mazo Living End" width="430" height="609" loading="lazy"><span class="pie"><span class="nombre">Living End</span><span class="tipo">Graveyard-Combo</span><span class="pips" aria-label="Colores: negro, verde, azul"><span class="pip b" title="negro"></span><span class="pip g" title="verde"></span><span class="pip u" title="azul"></span></span></span></button>
+    </div>
+    <div class="ficha-nota">
+      <h3>Nadie juega a ciegas</h3>
+      <p>Con el mazo se entrega su ficha: sus cartas clave y el plan de juego paso a paso. Tiene hueco para anotar la ronda y el jugador, así que al final del día queda registrado quién llevó cada mazo. Al que lleva años jugando no le quita nada. Al que viene por primera vez le ahorra las tres primeras partidas de ir perdido.</p>
+    </div>
+  </section>
+
+  <section id="formato">
+    <div class="cabecera-seccion">
+      <h2>Rondas suizas y Top 8</h2>
+      <p>Todos juegan todas las rondas suizas, se gane o se pierda. Al mejor de tres partidas, con mazo nuevo en cada ronda. Los ocho primeros pasan a la eliminatoria.</p>
+    </div>
+    <ol class="agenda">
+      <li><span class="hora">17:00</span><span class="que">Recepción</span><span class="det">Acreditaciones y sorteo del primer mazo</span></li>
+      <li><span class="hora"></span><span class="que">Rondas suizas</span><span class="det">Al mejor de tres, mazo nuevo en cada ronda</span></li>
+      <li class="hito"><span class="hora"></span><span class="que">Corte al Top 8</span><span class="det">Los ocho primeros de la clasificación</span></li>
+      <li><span class="hora"></span><span class="que">Cuartos, semifinales y final</span><span class="det">Eliminación directa, al mejor de tres</span></li>
+      <li><span class="hora"></span><span class="que">Entrega</span><span class="det">Trofeo y premios en material de tienda</span></li>
+    </ol>
+    <p style="margin-top:18px;color:var(--pergamino-2);font-size:.95rem">Las horas de cada ronda las marca la organización el mismo día.</p>
+  </section>
+
+  <section id="clasificacion">
+    <div class="cabecera-seccion">
+      <h2>Clasificación</h2>
+      <p>Se actualiza al cerrar cada ronda. Los ocho primeros pasan al corte.</p>
+    </div>
+    <div class="tabla-envoltorio">
+      <table>
+        <thead>
+          <tr><th>Puesto</th><th>Jugador</th><th>Puntos</th></tr>
+        </thead>
+        <tbody><tr class="corte"><td class="pos">1</td><td class="libre"></td><td class="libre"></td></tr>
+<tr class="corte"><td class="pos">2</td><td class="libre"></td><td class="libre"></td></tr>
+<tr class="corte"><td class="pos">3</td><td class="libre"></td><td class="libre"></td></tr>
+<tr class="corte"><td class="pos">4</td><td class="libre"></td><td class="libre"></td></tr>
+<tr class="corte"><td class="pos">5</td><td class="libre"></td><td class="libre"></td></tr>
+<tr class="corte"><td class="pos">6</td><td class="libre"></td><td class="libre"></td></tr>
+<tr class="corte"><td class="pos">7</td><td class="libre"></td><td class="libre"></td></tr>
+<tr class="corte"><td class="pos">8</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">9</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">10</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">11</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">12</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">13</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">14</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">15</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">16</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">17</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">18</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">19</td><td class="libre"></td><td class="libre"></td></tr>
+<tr><td class="pos">20</td><td class="libre"></td><td class="libre"></td></tr></tbody>
+      </table>
+    </div>
+    <p style="margin-top:18px;color:var(--pergamino-2);font-size:.95rem">Desempates, por este orden: victorias de tus rivales, después partidas ganadas. Se anuncia antes de empezar.</p>
+  </section>
+
+  <section id="premios">
+    <div class="cabecera-seccion">
+      <h2>Premios y recuerdo</h2>
+      <p>Los premios son en material de tienda: 30 % para el campeón, 20 % para el segundo, 12,5 % para los semifinalistas y 6,25 % del quinto al octavo.</p>
+    </div>
+    <div class="piezas">
+      <div class="apilado">
+        <div class="pieza">
+          <div class="cuerpo">
+            <h3>Moneda conmemorativa</h3>
+            <p>Zamak con acabado en oro antiguo, 40 mm y alto relieve por las dos caras. Una para cada uno de los veinte jugadores, se gane o se pierda.</p>
+          </div>
+        </div>
+        <div class="pieza">
+          <div class="cuerpo">
+            <h3>Acreditación con tu nombre</h3>
+            <p>Tarjeta y cordón con el nombre y el número de mesa, para llevarla puesta todo el día.</p>
+          </div>
+        </div>
+      </div>
+      <div class="pieza">
+        <img src="img/trofeo.jpg" alt="Trofeo del campeón: el reloj de arena partido sobre una base de piedra">
+        <div class="cuerpo">
+          <h3>Trofeo del campeón</h3>
+          <p>El reloj de arena partido sobre base de piedra, con la placa del Chapter I. Uno solo, para quien gane la final.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="cabecera-seccion">
+      <h2>Las finales, en vídeo</h2>
+      <p>El Top 8 se graba desde arriba y se sube al canal. Queda como archivo del Chapter I, y para que quien se lo esté pensando vea de qué va esto antes del siguiente.</p>
+    </div>
+    <p style="color:var(--pergamino-2)">El enlace al canal se pondrá aquí en cuanto esté abierto.</p>
+  </section>
+
+  <section id="inscripcion">
+    <div class="cierre">
+      <p class="precio">10 €</p>
+      <p class="plazas">20 plazas · mazo incluido</p>
+      <p style="max-width:46ch;color:var(--pergamino-2)">No hace falta tener mazo ni haber jugado Modern nunca. El mazo te lo dan al llegar.</p>
+      <p style="max-width:46ch;color:var(--pergamino-2)">La plaza se reserva con Jomy, por WhatsApp o llamando al <a href="tel:+34687300243">687 300 243</a>.</p>
+      <a class="boton" href="https://wa.me/34687300243?text=Hola%20Jomy%2C%20quiero%20reservar%20plaza%20en%20el%20Modern%202015%20Invitational" target="_blank" rel="noopener">Reservar plaza por WhatsApp</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="marca">Jomy Tournaments</div>
+  <div>The Golden Age Returns · Chapter I · Modern 2015 Invitational</div>
+  <div>Sábado 19 de septiembre · 17:00 h · Cartinha Brilhante · Almería</div>
+</footer>
+<dialog class="ficha-dialogo" id="ficha-dialogo" aria-label="Ficha del mazo">
+  <div class="ficha-barra">
+    <span class="titulo" id="ficha-titulo"></span>
+    <span class="grupo">
+      <button class="util" type="button" id="ficha-anterior" aria-label="Mazo anterior">&#8249;</button>
+      <button class="util" type="button" id="ficha-siguiente" aria-label="Mazo siguiente">&#8250;</button>
+      <button class="util" type="button" id="ficha-ampliar">Ampliar</button>
+      <button class="util" type="button" id="ficha-cerrar">Cerrar</button>
+    </span>
+  </div>
+  <div class="ficha-cuerpo" id="ficha-cuerpo"><img id="ficha-img" alt=""></div>
+</dialog>
+<script type="application/json" id="fichas-datos">[{"n": "Abzan", "src": "img/abzan-back.webp"}, {"n": "Death Cloud", "src": "img/death-cloud-back.webp"}, {"n": "Infect", "src": "img/infect-back.webp"}, {"n": "Jeskai", "src": "img/jeskai-back.webp"}, {"n": "Project Melira", "src": "img/melira-back.webp"}, {"n": "PIF Combo", "src": "img/pif-back.webp"}, {"n": "Tezzerator Prison", "src": "img/tezzerator-back.webp"}, {"n": "Affinity", "src": "img/affinity-back.webp"}, {"n": "Bant Aggro", "src": "img/bant-back.webp"}, {"n": "Green Tron", "src": "img/tron-back.webp"}, {"n": "Tokens", "src": "img/tokens-back.webp"}, {"n": "Red Deck Wins", "src": "img/red-deck-wins-back.webp"}, {"n": "Twin", "src": "img/twin-back.webp"}, {"n": "UB Faeries", "src": "img/ub-faeries-back.webp"}, {"n": "Valakut", "src": "img/valakut-back.webp"}, {"n": "5 Colors Zoo", "src": "img/5-colors-zoo-back.webp"}, {"n": "Grixis Shadow", "src": "img/grixis-shadow-back.webp"}, {"n": "Hatebear", "src": "img/hatebear-back.webp"}, {"n": "Jund", "src": "img/jund-back.webp"}, {"n": "Living End", "src": "img/living-end-back.webp"}]</script>
+<script>
+(function(){
+  var dlg=document.getElementById('ficha-dialogo');
+  if(!dlg||typeof dlg.showModal!=='function') return;
+  var img=document.getElementById('ficha-img'),titulo=document.getElementById('ficha-titulo'),cuerpo=document.getElementById('ficha-cuerpo'),ampliar=document.getElementById('ficha-ampliar');
+  var fichas=null,i=0;
+  function datos(){ if(!fichas){ fichas=JSON.parse(document.getElementById('fichas-datos').textContent); } return fichas; }
+  function mostrar(k){
+    var f=datos(); i=(k+f.length)%f.length;
+    img.src=f[i].src; img.alt='Ficha del mazo '+f[i].n; titulo.textContent=f[i].n;
+    cuerpo.scrollTop=0; cuerpo.scrollLeft=0; cuerpo.classList.remove('ampliada'); ampliar.textContent='Ampliar';
+  }
+  document.querySelectorAll('.carta').forEach(function(b){
+    b.addEventListener('click',function(){ mostrar(+b.getAttribute('data-i')); dlg.showModal(); });
+  });
+  document.getElementById('ficha-cerrar').addEventListener('click',function(){ dlg.close(); });
+  document.getElementById('ficha-anterior').addEventListener('click',function(){ mostrar(i-1); });
+  document.getElementById('ficha-siguiente').addEventListener('click',function(){ mostrar(i+1); });
+  ampliar.addEventListener('click',function(){
+    var on=cuerpo.classList.toggle('ampliada'); ampliar.textContent=on?'Ajustar':'Ampliar';
+  });
+  dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); });
+  dlg.addEventListener('close',function(){ img.removeAttribute('src'); });
+  document.addEventListener('keydown',function(e){
+    if(!dlg.open) return;
+    if(e.key==='ArrowLeft') mostrar(i-1);
+    if(e.key==='ArrowRight') mostrar(i+1);
+  });
+})();
+</script>
+</body>
+</html>
