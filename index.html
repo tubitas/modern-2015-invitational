@@ -218,6 +218,34 @@
   .ficha-cuerpo img{display:block;width:100%;height:auto}
   .ficha-cuerpo.ampliada img{width:900px;max-width:none}
 
+  /* simulador */
+  .sim-controles{display:flex;align-items:center;gap:18px 28px;flex-wrap:wrap;margin-bottom:30px}
+  .boton-sim{font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:15px;color:var(--oro-claro);background:none;border:1px solid var(--oro);padding:14px 26px;cursor:pointer;transition:background .18s ease,color .18s ease}
+  .boton-sim:hover{background:var(--oro);color:var(--tinta)}
+  .sim-rondas{display:inline-flex;align-items:center;gap:8px;font-family:var(--util);letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--pergamino-2)}
+  .sim-rondas button{font:inherit;color:var(--pergamino-2);background:none;border:1px solid var(--linea);padding:6px 11px;cursor:pointer}
+  .sim-rondas button[aria-pressed="true"]{color:var(--tinta);background:var(--oro);border-color:var(--oro)}
+  .camino{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:22px 14px}
+  .camino:empty{display:none}
+  .paso{display:flex;flex-direction:column;gap:5px}
+  .paso .ronda{font-family:var(--util);letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--oro-tenue)}
+  .paso.final .ronda{color:var(--brasa)}
+  .naipe{perspective:900px;aspect-ratio:360/510}
+  .naipe-int{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+  .paso.volteado .naipe-int{transform:rotateY(180deg)}
+  .cara{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--linea);overflow:hidden}
+  .cara.dorso{background:var(--tinta-3) radial-gradient(circle at 50% 45%,rgba(200,164,76,.18),transparent 65%);display:flex;align-items:center;justify-content:center}
+  .cara.dorso img{width:56%;height:auto;mix-blend-mode:screen;opacity:.85}
+  .cara.frente{transform:rotateY(180deg);box-shadow:0 12px 30px rgba(10,9,8,.7)}
+  .cara.frente img{width:100%;height:100%;object-fit:cover;display:block}
+  .paso.final .cara.frente{border-color:var(--brasa);box-shadow:0 0 0 1px var(--brasa),0 12px 30px rgba(10,9,8,.7)}
+  .paso .nombre{font-family:var(--display);font-size:.92rem;color:var(--oro-claro);letter-spacing:.02em;line-height:1.2;margin-top:4px}
+  .paso .tipo{font-family:var(--util);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--pergamino-2)}
+  .paso .rival{font-size:.86rem;font-style:italic;color:var(--pergamino-2);margin-top:2px}
+  .sim-lectura{margin-top:28px;font-size:1.15rem;color:var(--pergamino);max-width:60ch;opacity:0;transition:opacity .6s ease}
+  .sim-lectura.in{opacity:1}
+  .sim-acciones{margin-top:14px}
+
   /* aparición al hacer scroll (solo con JS) */
   html.js .rev{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
   html.js .rev.in{opacity:1;transform:none}
@@ -238,6 +266,7 @@
     <button class="menu-boton util" type="button" id="menu-boton" aria-expanded="false" aria-controls="menu-lista">Menú</button>
     <ul class="menu-lista" id="menu-lista">
       <li><a href="#plazas">Plazas <span class="pill" data-libres-pill>15 libres</span></a></li>
+      <li><a href="#simulador">Simulador</a></li>
       <li><a href="#mazos">Mazos</a></li>
       <li><a href="#como-se-juega">Cómo se juega</a></li>
       <li><a href="#reglas">Reglas</a></li>
@@ -337,6 +366,24 @@
         <p>Hay un mazo por jugador, así que en cada ronda están los veinte sobre la mesa. Nadie sabe de antemano cuál le va a tocar.</p>
       </div>
     </div>
+  </section>
+
+  <section id="simulador">
+    <div class="cabecera-seccion rev">
+      <h2>Tu camino a la final</h2>
+      <p>Así sería el día de quien llega a la final: un mazo distinto en cada ronda, sorteado, y enfrente otro que tampoco ha elegido nadie. Pulsa y mira qué te habría tocado. Cada vez sale un camino distinto.</p>
+    </div>
+    <div class="sim-controles rev">
+      <button class="boton-sim" type="button" id="sim-sortear">Sortear mi camino</button>
+      <div class="sim-rondas" role="group" aria-label="Rondas suizas">
+        <span>Rondas suizas</span>
+        <button type="button" data-r="4" aria-pressed="false">4</button>
+        <button type="button" data-r="5" aria-pressed="true">5</button>
+      </div>
+    </div>
+    <ol class="camino" id="camino" aria-live="polite"></ol>
+    <p class="sim-lectura" id="sim-lectura"></p>
+    <div class="sim-acciones"><button class="util" type="button" id="sim-compartir" hidden>Compartir mi camino</button></div>
   </section>
 
   <section id="mazos">
@@ -548,7 +595,7 @@
   </div>
 </dialog>
 
-<script type="application/json" id="fichas-datos">[{"n": "Abzan", "src": "img/abzan-back.webp", "como": "Criaturas que valen más de lo que cuestan, Siege Rhino y Tarmogoyf, con Thoughtseize y Path to Exile para quitar de en medio lo que estorba. Se juega con calma: cambia cartas una por una, recupera valor con Lingering Souls y deja que Liliana of the Veil vacíe la mano del rival. Gana cuando al otro ya no le queda nada que hacer."}, {"n": "Death Cloud", "src": "img/death-cloud-back.webp", "como": "Un mazo de control que juega a dejar al rival sin recursos. Descarte al principio, Kitchen Finks y Thragtusk para aguantar, y en cuanto vas por delante en tierras lanzas Death Cloud, que castiga a los dos jugadores a la vez, pero tú te recuperas antes con Garruk y Tasigur. Es lento y exige contar bien."}, {"n": "Infect", "src": "img/infect-back.webp", "como": "No hace daño normal: reparte veneno, y a diez contadores la partida se acaba. Glistener Elf o Blighted Agent en el primer turno, y luego hechizos de crecimiento como Might of Old Krosa o Become Immense para cerrar en dos golpes. Mantén la criatura viva y no ataques a lo loco: cuenta las cartas que le quedan al rival en la mano."}, {"n": "Jeskai", "src": "img/jeskai-back.webp", "como": "Rayos y contrahechizos. Lightning Bolt y Lightning Helix quitan criaturas, Remand y Cryptic Command frenan al rival, y Snapcaster Mage vuelve a lanzar lo mejor del cementerio. Cuando la mesa está limpia, Restoration Angel o Vendilion Clique rematan por el aire. Pide paciencia: casi todo se juega en el turno del contrario."}, {"n": "Project Melira", "src": "img/melira-back.webp", "como": "Un mazo de criaturas con una combinación infinita escondida: Melira o Anafenza junto a Kitchen Finks o Murderous Redcap y Viscera Seer dan vida o daño sin límite. Hasta que aparece, juega a criaturas normales con Birds of Paradise y Noble Hierarch, y busca las piezas con Chord of Calling y Collected Company."}, {"n": "PIF Combo", "src": "img/pif-back.webp", "como": "Es el mazo de tormenta: cantrips baratos como Serum Visions y Sleight of Hand para ordenar la mano, rituales para el maná, y Past in Flames para volver a lanzar todo desde el cementerio y acabar con Grapeshot. Es el que más cuenta exige de los veinte: cada hechizo suma y un error rompe el turno."}, {"n": "Tezzerator Prison", "src": "img/tezzerator-back.webp", "como": "Encierra al rival en vez de matarlo. Chalice of the Void y Ensnaring Bridge le impiden jugar y atacar, Pithing Needle y Phyrexian Revoker apagan sus mejores cartas, y Tezzeret busca las piezas y convierte los artefactos en la amenaza. Gana despacio, sin dar opciones."}, {"n": "Affinity", "src": "img/affinity-back.webp", "como": "Todo son artefactos y todo sale de golpe: Ornithopter, Memnite, Vault Skirge y Signal Pest en los dos primeros turnos, Cranial Plating para que una criatura pegue por seis, y Arcbound Ravager para sacrificar lo que sobra y rematar. Es el más rápido de la mesa y el que peor lo pasa contra un solo destructor de artefactos."}, {"n": "Bant Aggro", "src": "img/bant-back.webp", "como": "Criaturas eficientes y maná de sobra: Noble Hierarch acelera y Tarmogoyf y Voice of Resurgence pegan. Collected Company saca dos criaturas de golpe al final del turno del rival, y Path to Exile y Dromoka's Command limpian el camino. Geist of Saint Traft cierra la partida."}, {"n": "Green Tron", "src": "img/tron-back.webp", "como": "Reúne las tres tierras de Urza con Expedition Map y Ancient Stirrings, y en el turno tres tienes siete manás. A partir de ahí Karn Liberated y Wurmcoil Engine hacen el resto, y Emrakul cierra cualquier partida que se alargue. Los primeros turnos son los débiles: sobrevívelos."}, {"n": "Tokens", "src": "img/tokens-back.webp", "como": "Muchas fichas pequeñas en vez de una criatura grande. Lingering Souls y Spectral Procession llenan la mesa, Bitterblossom da una ficha cada turno, e Intangible Virtue y Zealous Persecution las hacen pegar de verdad. Sorin, Solemn Visitor da vida y vuelve a subir el ataque. Aguanta bien el daño y sufre ante un barrido."}, {"n": "Red Deck Wins", "src": "img/red-deck-wins-back.webp", "como": "El más directo: Goblin Guide y Monastery Swiftspear en el primer turno, y luego Lightning Bolt y Lava Spike a la cara. Eidolon of the Great Revel castiga cada hechizo barato del rival. La partida se decide antes del turno cinco; cuenta los veinte puntos de vida desde el principio."}, {"n": "Twin", "src": "img/twin-back.webp", "como": "Deceiver Exarch o Pestermite al final del turno del rival, y en el tuyo Splinter Twin sobre esa criatura: copias infinitas y ataque ganador. Mientras tanto se juega como un control azul, con Remand y Cryptic Command, y Lightning Bolt para las criaturas. Protege la combinación y no la lances contra una mano llena."}, {"n": "UB Faeries", "src": "img/ub-faeries-back.webp", "como": "Hadas que entran al final del turno y contrarrestan. Bitterblossom da una ficha cada turno, Spellstutter Sprite y Vendilion Clique molestan, Mistbind Clique deja al rival sin maná, y Cryptic Command y Mana Leak cierran la puerta. Gana poco a poco por el aire. Exige saber cuándo pasar el turno sin hacer nada."}, {"n": "Valakut", "src": "img/valakut-back.webp", "como": "Acelera tierras con Sakura-Tribe Elder y Search for Tomorrow, y con Valakut en mesa cada Montaña que entra hace tres puntos de daño. Primeval Titan busca dos tierras al entrar y otras dos al atacar, y Through the Breach lo mete en juego antes de tiempo. Cuando arranca, no hay bloqueador que sirva."}, {"n": "5 Colors Zoo", "src": "img/5-colors-zoo-back.webp", "como": "Criaturas baratas y grandes para su coste, Wild Nacatl y Tarmogoyf, con Lightning Bolt y Path to Exile para despejar. Los cinco colores salen de las tierras de doble tipo, así que cada tierra que bajas hay que pensarla. Golpea desde el turno uno y cierra con quemaduras."}, {"n": "Grixis Shadow", "src": "img/grixis-shadow-back.webp", "como": "Death's Shadow crece cuanta menos vida tienes, así que este mazo se hace daño a sí mismo a propósito con Thoughtseize y Street Wraith. Gurmag Angler y Tasigur salen casi gratis desde el cementerio, y Stubborn Denial y Terminate protegen la mesa. Se juega al filo: cada punto de vida es una decisión."}, {"n": "Hatebear", "src": "img/hatebear-back.webp", "como": "Criaturas pequeñas que entorpecen. Thalia encarece los hechizos, Leonin Arbiter y Ghost Quarter cortan el maná, Aether Vial mete criaturas sin gastar, y Flickerwisp y Restoration Angel repiten las entradas. No mata rápido: ahoga al rival y pega cada turno con dos o tres criaturas."}, {"n": "Jund", "src": "img/jund-back.webp", "como": "El mazo de las buenas cartas: Thoughtseize, Lightning Bolt, Tarmogoyf, Dark Confidant y Liliana of the Veil. Cambia carta por carta, roba de más con Confidant y remata con lo que quede en pie. Sin combinación y sin trucos: quien mejor cuenta los intercambios se lleva la partida."}, {"n": "Living End", "src": "img/living-end-back.webp", "como": "Descarta criaturas enormes con ciclo, como Monstrous Carabid y Street Wraith, durante tres turnos, y lanza Living End en cascada con Violent Outburst o Demonic Dread: la mesa del rival se va al cementerio y las tuyas vuelven. Un solo hechizo decide, así que guarda un segundo Living End para responder al contrarresto."}]</script>
+<script type="application/json" id="fichas-datos">[{"n": "Abzan", "src": "img/abzan-back.webp", "como": "Criaturas que valen más de lo que cuestan, Siege Rhino y Tarmogoyf, con Thoughtseize y Path to Exile para quitar de en medio lo que estorba. Se juega con calma: cambia cartas una por una, recupera valor con Lingering Souls y deja que Liliana of the Veil vacíe la mano del rival. Gana cuando al otro ya no le queda nada que hacer.", "f": "img/abzan-front.webp", "t": "Midrange", "c": "wbg"}, {"n": "Death Cloud", "src": "img/death-cloud-back.webp", "como": "Un mazo de control que juega a dejar al rival sin recursos. Descarte al principio, Kitchen Finks y Thragtusk para aguantar, y en cuanto vas por delante en tierras lanzas Death Cloud, que castiga a los dos jugadores a la vez, pero tú te recuperas antes con Garruk y Tasigur. Es lento y exige contar bien.", "f": "img/death-cloud-front.webp", "t": "Control", "c": "bg"}, {"n": "Infect", "src": "img/infect-back.webp", "como": "No hace daño normal: reparte veneno, y a diez contadores la partida se acaba. Glistener Elf o Blighted Agent en el primer turno, y luego hechizos de crecimiento como Might of Old Krosa o Become Immense para cerrar en dos golpes. Mantén la criatura viva y no ataques a lo loco: cuenta las cartas que le quedan al rival en la mano.", "f": "img/infect-front.webp", "t": "Aggro-Combo", "c": "bg"}, {"n": "Jeskai", "src": "img/jeskai-back.webp", "como": "Rayos y contrahechizos. Lightning Bolt y Lightning Helix quitan criaturas, Remand y Cryptic Command frenan al rival, y Snapcaster Mage vuelve a lanzar lo mejor del cementerio. Cuando la mesa está limpia, Restoration Angel o Vendilion Clique rematan por el aire. Pide paciencia: casi todo se juega en el turno del contrario.", "f": "img/jeskai-front.webp", "t": "Control", "c": "urw"}, {"n": "Project Melira", "src": "img/melira-back.webp", "como": "Un mazo de criaturas con una combinación infinita escondida: Melira o Anafenza junto a Kitchen Finks o Murderous Redcap y Viscera Seer dan vida o daño sin límite. Hasta que aparece, juega a criaturas normales con Birds of Paradise y Noble Hierarch, y busca las piezas con Chord of Calling y Collected Company.", "f": "img/melira-front.webp", "t": "Combo", "c": "gwb"}, {"n": "PIF Combo", "src": "img/pif-back.webp", "como": "Es el mazo de tormenta: cantrips baratos como Serum Visions y Sleight of Hand para ordenar la mano, rituales para el maná, y Past in Flames para volver a lanzar todo desde el cementerio y acabar con Grapeshot. Es el que más cuenta exige de los veinte: cada hechizo suma y un error rompe el turno.", "f": "img/pif-front.webp", "t": "Combo", "c": "ur"}, {"n": "Tezzerator Prison", "src": "img/tezzerator-back.webp", "como": "Encierra al rival en vez de matarlo. Chalice of the Void y Ensnaring Bridge le impiden jugar y atacar, Pithing Needle y Phyrexian Revoker apagan sus mejores cartas, y Tezzeret busca las piezas y convierte los artefactos en la amenaza. Gana despacio, sin dar opciones.", "f": "img/tezzerator-front.webp", "t": "Control · Artefactos", "c": "ub"}, {"n": "Affinity", "src": "img/affinity-back.webp", "como": "Todo son artefactos y todo sale de golpe: Ornithopter, Memnite, Vault Skirge y Signal Pest en los dos primeros turnos, Cranial Plating para que una criatura pegue por seis, y Arcbound Ravager para sacrificar lo que sobra y rematar. Es el más rápido de la mesa y el que peor lo pasa contra un solo destructor de artefactos.", "f": "img/affinity-front.webp", "t": "Aggro-Combo", "c": "cub"}, {"n": "Bant Aggro", "src": "img/bant-back.webp", "como": "Criaturas eficientes y maná de sobra: Noble Hierarch acelera y Tarmogoyf y Voice of Resurgence pegan. Collected Company saca dos criaturas de golpe al final del turno del rival, y Path to Exile y Dromoka's Command limpian el camino. Geist of Saint Traft cierra la partida.", "f": "img/bant-front.webp", "t": "Aggro · Midrange", "c": "gwu"}, {"n": "Green Tron", "src": "img/tron-back.webp", "como": "Reúne las tres tierras de Urza con Expedition Map y Ancient Stirrings, y en el turno tres tienes siete manás. A partir de ahí Karn Liberated y Wurmcoil Engine hacen el resto, y Emrakul cierra cualquier partida que se alargue. Los primeros turnos son los débiles: sobrevívelos.", "f": "img/tron-front.webp", "t": "Rampa · Control", "c": "gc"}, {"n": "Tokens", "src": "img/tokens-back.webp", "como": "Muchas fichas pequeñas en vez de una criatura grande. Lingering Souls y Spectral Procession llenan la mesa, Bitterblossom da una ficha cada turno, e Intangible Virtue y Zealous Persecution las hacen pegar de verdad. Sorin, Solemn Visitor da vida y vuelve a subir el ataque. Aguanta bien el daño y sufre ante un barrido.", "f": "img/tokens-front.webp", "t": "Go-Wide", "c": "wb"}, {"n": "Red Deck Wins", "src": "img/red-deck-wins-back.webp", "como": "El más directo: Goblin Guide y Monastery Swiftspear en el primer turno, y luego Lightning Bolt y Lava Spike a la cara. Eidolon of the Great Revel castiga cada hechizo barato del rival. La partida se decide antes del turno cinco; cuenta los veinte puntos de vida desde el principio.", "f": "img/red-deck-wins-front.webp", "t": "Aggro", "c": "r"}, {"n": "Twin", "src": "img/twin-back.webp", "como": "Deceiver Exarch o Pestermite al final del turno del rival, y en el tuyo Splinter Twin sobre esa criatura: copias infinitas y ataque ganador. Mientras tanto se juega como un control azul, con Remand y Cryptic Command, y Lightning Bolt para las criaturas. Protege la combinación y no la lances contra una mano llena.", "f": "img/twin-front.webp", "t": "Combo", "c": "ur"}, {"n": "UB Faeries", "src": "img/ub-faeries-back.webp", "como": "Hadas que entran al final del turno y contrarrestan. Bitterblossom da una ficha cada turno, Spellstutter Sprite y Vendilion Clique molestan, Mistbind Clique deja al rival sin maná, y Cryptic Command y Mana Leak cierran la puerta. Gana poco a poco por el aire. Exige saber cuándo pasar el turno sin hacer nada.", "f": "img/ub-faeries-front.webp", "t": "Disrupción", "c": "ub"}, {"n": "Valakut", "src": "img/valakut-back.webp", "como": "Acelera tierras con Sakura-Tribe Elder y Search for Tomorrow, y con Valakut en mesa cada Montaña que entra hace tres puntos de daño. Primeval Titan busca dos tierras al entrar y otras dos al atacar, y Through the Breach lo mete en juego antes de tiempo. Cuando arranca, no hay bloqueador que sirva.", "f": "img/valakut-front.webp", "t": "Rampa", "c": "rg"}, {"n": "5 Colors Zoo", "src": "img/5-colors-zoo-back.webp", "como": "Criaturas baratas y grandes para su coste, Wild Nacatl y Tarmogoyf, con Lightning Bolt y Path to Exile para despejar. Los cinco colores salen de las tierras de doble tipo, así que cada tierra que bajas hay que pensarla. Golpea desde el turno uno y cierra con quemaduras.", "f": "img/5-colors-zoo-front.webp", "t": "Aggro · Midrange", "c": "wubrg"}, {"n": "Grixis Shadow", "src": "img/grixis-shadow-back.webp", "como": "Death's Shadow crece cuanta menos vida tienes, así que este mazo se hace daño a sí mismo a propósito con Thoughtseize y Street Wraith. Gurmag Angler y Tasigur salen casi gratis desde el cementerio, y Stubborn Denial y Terminate protegen la mesa. Se juega al filo: cada punto de vida es una decisión.", "f": "img/grixis-shadow-front.webp", "t": "Control · Midrange", "c": "ubr"}, {"n": "Hatebear", "src": "img/hatebear-back.webp", "como": "Criaturas pequeñas que entorpecen. Thalia encarece los hechizos, Leonin Arbiter y Ghost Quarter cortan el maná, Aether Vial mete criaturas sin gastar, y Flickerwisp y Restoration Angel repiten las entradas. No mata rápido: ahoga al rival y pega cada turno con dos o tres criaturas.", "f": "img/hatebear-front.webp", "t": "Stax · Control", "c": "w"}, {"n": "Jund", "src": "img/jund-back.webp", "como": "El mazo de las buenas cartas: Thoughtseize, Lightning Bolt, Tarmogoyf, Dark Confidant y Liliana of the Veil. Cambia carta por carta, roba de más con Confidant y remata con lo que quede en pie. Sin combinación y sin trucos: quien mejor cuenta los intercambios se lleva la partida.", "f": "img/jund-front.webp", "t": "Midrange", "c": "brg"}, {"n": "Living End", "src": "img/living-end-back.webp", "como": "Descarta criaturas enormes con ciclo, como Monstrous Carabid y Street Wraith, durante tres turnos, y lanza Living End en cascada con Violent Outburst o Demonic Dread: la mesa del rival se va al cementerio y las tuyas vuelven. Un solo hechizo decide, así que guarda un segundo Living End para responder al contrarresto.", "f": "img/living-end-front.webp", "t": "Graveyard-Combo", "c": "bgu"}]</script>
 <script>
 (function(){
   document.documentElement.classList.add('js');
@@ -605,12 +652,74 @@
     pintado=true; pintaPlazas(total, apuntados, txt);
   }).catch(function(){});
 
+  /* datos de los mazos (para la ficha y el simulador) */
+  var fichas=null;
+  function datos(){ if(!fichas){ fichas=JSON.parse(document.getElementById('fichas-datos').textContent); } return fichas; }
+
+  /* simulador: el camino de un finalista */
+  var simBoton=document.getElementById('sim-sortear'), camino=document.getElementById('camino'), lectura=document.getElementById('sim-lectura'), compartir=document.getElementById('sim-compartir');
+  var rondasSuizas=5, ultimo=null;
+  document.querySelectorAll('.sim-rondas button').forEach(function(b){
+    b.addEventListener('click',function(){
+      rondasSuizas=+b.getAttribute('data-r');
+      document.querySelectorAll('.sim-rondas button').forEach(function(o){ o.setAttribute('aria-pressed', o===b?'true':'false'); });
+      if(ultimo) sortear();
+    });
+  });
+  function baraja(n){ var a=[]; for(var k=0;k<n;k++) a.push(k); for(var k=n-1;k>0;k--){ var j=Math.floor(Math.random()*(k+1)); var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+  function etiquetas(){ var e=[]; for(var k=1;k<=rondasSuizas;k++) e.push('Ronda '+k); return e.concat(['Cuartos','Semifinal','Final']); }
+  function pipsHtml(c){ return c.split('').map(function(x){ return '<span class="pip '+x+'"></span>'; }).join(''); }
+  function enRonda(r){ if(r.indexOf('Ronda')===0) return 'la '+r.toLowerCase(); if(r==='Cuartos') return 'cuartos'; return 'la '+r.toLowerCase(); }
+  function sortear(){
+    var f=datos(), et=etiquetas(), orden=baraja(f.length).slice(0,et.length), res=[];
+    for(var k=0;k<et.length;k++){
+      var mio=orden[k], rival, previo=k?res[k-1].rivalIdx:-1; do{ rival=Math.floor(Math.random()*f.length); }while(rival===mio||rival===previo);
+      res.push({ronda:et[k], yo:f[mio], rival:f[rival], rivalIdx:rival, final:k===et.length-1});
+    }
+    ultimo=res; pinta(res);
+  }
+  function pinta(res){
+    camino.innerHTML=''; lectura.classList.remove('in'); compartir.hidden=true;
+    res.forEach(function(p,k){
+      var li=document.createElement('li'); li.className='paso'+(p.final?' final':'');
+      li.innerHTML='<span class="ronda">'+p.ronda+'</span>'
+        +'<div class="naipe"><div class="naipe-int"><div class="cara dorso"><img src="img/emblema.webp" alt="" width="60" height="60"></div>'
+        +'<div class="cara frente"><img src="'+p.yo.f+'" alt="'+p.yo.n+'" width="360" height="510"></div></div></div>'
+        +'<span class="nombre">'+p.yo.n+'</span><span class="tipo">'+p.yo.t+'</span><span class="pips">'+pipsHtml(p.yo.c)+'</span>'
+        +'<span class="rival">Enfrente, '+p.rival.n+'</span>';
+      camino.appendChild(li);
+      setTimeout(function(){ li.classList.add('volteado'); }, reduce?0:140+k*380);
+    });
+    setTimeout(function(){ lectura.textContent=lee(res); lectura.classList.add('in'); compartir.hidden=false; }, reduce?0:140+res.length*380+250);
+    simBoton.textContent='Volver a sortear';
+  }
+  function lee(res){
+    var cuenta=function(s){ return res.filter(function(p){ return p.yo.t.indexOf(s)>=0; }).length; };
+    var fin=res[res.length-1].yo.n, frases=['Llegas a la final con '+fin+'.'];
+    var combo=cuenta('Combo'), aggro=cuenta('Aggro'), control=cuenta('Control');
+    if(combo>=3) frases.push('Te han tocado '+combo+' combos por el camino: día de contar bien.');
+    else if(aggro>=3) frases.push(aggro+' mazos de aggro: partidas cortas y a la cara.');
+    else if(control>=3) frases.push(control+' de control: turnos largos y paciencia.');
+    else frases.push('Un camino variado, de todo un poco.');
+    var pif=res.filter(function(p){ return p.yo.n==='PIF Combo'; })[0];
+    if(pif) frases.push('Y PIF Combo en '+enRonda(pif.ronda)+': el que más cuenta exige de los veinte.');
+    return frases.join(' ');
+  }
+  if(simBoton){
+    simBoton.addEventListener('click', sortear);
+    compartir.addEventListener('click',function(){
+      if(!ultimo) return;
+      var t='Mi camino a la final del Modern 2015 Invitational: '+ultimo.map(function(p){ return p.ronda+' '+p.yo.n; }).join(' · ')+'. Sortea el tuyo: https://tubitas.github.io/modern-2015-invitational/#simulador';
+      if(navigator.share){ navigator.share({text:t}).catch(function(){}); }
+      else window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank','noopener');
+    });
+  }
+
   /* ficha de cada mazo */
   var dlg=document.getElementById('ficha-dialogo');
   if(!dlg||typeof dlg.showModal!=='function') return;
   var img=document.getElementById('ficha-img'),titulo=document.getElementById('ficha-titulo'),cuerpo=document.getElementById('ficha-cuerpo'),ampliar=document.getElementById('ficha-ampliar'),como=document.getElementById('ficha-como');
-  var fichas=null,i=0;
-  function datos(){ if(!fichas){ fichas=JSON.parse(document.getElementById('fichas-datos').textContent); } return fichas; }
+  var i=0;
   function mostrar(k){
     var f=datos(); i=(k+f.length)%f.length;
     img.src=f[i].src; img.alt='Ficha del mazo '+f[i].n; titulo.textContent=f[i].n; como.textContent=f[i].como||'';
