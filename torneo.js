@@ -153,18 +153,13 @@
   }
 
   /* ---------- emparejar ---------- */
-  // Emparejamiento suizo: por puntos, sin repetir rival; bye al último sin bye previo.
+  // Emparejamiento suizo por ranking: la ronda 1 al azar; después, con la clasificación completa
+  // (puntos y desempates) el 1.º juega contra el 2.º, el 3.º contra el 4.º… saltando a quien ya
+  // se haya enfrentado. La mesa 1 es la del mejor clasificado. Bye al último sin bye previo.
   function emparejarSuiza(e) {
     var cl = clasificacion(e).filter(function (j) { return !j.retirado; });
     var n = e.rondas.filter(function (r) { return r.tipo === 'suiza'; }).length + 1;
-    var orden;
-    if (n === 1) orden = baraja(cl);
-    else {
-      // mismo grupo de puntos: al azar dentro del grupo, como manda la suiza
-      orden = []; var grupo = [], pm = null;
-      cl.forEach(function (j) { if (pm !== null && j.pm !== pm) { orden = orden.concat(baraja(grupo)); grupo = []; } grupo.push(j); pm = j.pm; });
-      orden = orden.concat(baraja(grupo));
-    }
+    var orden = n === 1 ? baraja(cl) : cl;
     var ids = orden.map(function (j) { return j.id; });
     var previos = rivalesPrevios(e);
     function empareja(lista) {

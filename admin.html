@@ -87,6 +87,14 @@
   #login img{width:80px;mix-blend-mode:screen}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   label.campo{display:block;font-family:var(--util);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--oro-tenue);margin-bottom:4px}
+  .mz-fila{display:grid;grid-template-columns:1fr 84px 84px;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--linea-suave)}
+  .mz-fila.cab{font-family:var(--util);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--oro-tenue);padding-bottom:4px}
+  .mz-fila .nm{font-size:17px}
+  .mz-fila .nm small{display:block;font-family:var(--util);font-size:12px;letter-spacing:.06em;color:var(--pergamino-2);text-transform:uppercase}
+  .mz-fila.fuera-top .nm{color:var(--pergamino-2)}
+  .mz-fila label{display:flex;align-items:center;justify-content:center;min-height:40px;border:1px solid var(--linea);border-radius:3px;cursor:pointer;font-family:var(--util);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--pergamino-2)}
+  .mz-fila label.on{background:var(--oro);color:var(--tinta);border-color:var(--oro-claro);font-weight:600}
+  .mz-fila input{position:absolute;opacity:0;width:0;height:0}
   .podio{text-align:center;padding:10px 0}
   .podio .campeon{font-family:var(--display);color:var(--oro-claro);font-size:1.6rem}
   @media print{
@@ -146,6 +154,13 @@
 
     <!-- MÁS -->
     <section class="vista" id="v-mas">
+      <div class="tarjeta" id="mazos-tarjeta">
+        <h2>Mazos en juego</h2>
+        <p class="nota" style="margin-top:6px">Desmarca los que no quieras que entren en el sorteo. La columna Top manda en cuartos, semis y final. Un mazo apartado a mitad de torneo no afecta a las rondas ya publicadas.</p>
+        <div class="botonera" style="justify-content:flex-start"><button class="peq" type="button" data-mz-todos="top">Top: todos</button><button class="peq" type="button" data-mz-ninguno="top">Top: ninguno</button><button class="peq" type="button" data-mz-todos="suiza">Suizas: todos</button></div>
+        <p class="nota" id="mazos-aviso" style="margin-top:8px"></p>
+        <div id="mazos-lista" style="margin-top:8px"></div>
+      </div>
       <div class="tarjeta">
         <h2>Ajustes</h2>
         <div class="grid2" style="margin-top:10px">
@@ -208,6 +223,9 @@
   function toast(t, mal){ var el = $('#toast'); el.textContent = t; el.className = 'toast ver' + (mal ? ' mal' : ''); clearTimeout(el._t); el._t = setTimeout(function(){ el.className = 'toast'; }, mal ? 4000 : 1800); }
   function clon(x){ return JSON.parse(JSON.stringify(x)); }
   function slugs(){ return MAZOS.map(function(x){ return x.id; }); }
+  // Mazos que entran en el sorteo según la fase: Jomy puede dejar fuera los que quiera (p. ej. para el Top 8).
+  function fuera(e, tipo){ var c = e.config; return (tipo === 'suiza' ? c.mazos_fuera_suizas : c.mazos_fuera_top) || []; }
+  function slugsPara(e, tipo){ var f = fuera(e, tipo); return slugs().filter(function(s){ return f.indexOf(s) < 0; }); }
   function nomMazo(s){ return s && MAPA[s] ? MAPA[s].n : (s || '—'); }
 
   fetch('mazos.json', {cache:'no-store'}).then(function(r){ return r.json(); }).then(function(d){ MAZOS = d; d.forEach(function(x){ MAPA[x.id] = x; }); render(); }).catch(function(){ toast('No cargan los mazos (mazos.json)', true); });
@@ -309,7 +327,7 @@
       var act = T.activos(E).length, n = E.rondas.filter(function(x){ return x.tipo === 'suiza'; }).length + 1;
       h += '<div class="tarjeta"><h2>Siguiente: ' + esc(T.nombreTipo(sig, n)) + '</h2>';
       if (sig === 'suiza') h += '<p class="nota" style="margin-top:6px">' + act + ' jugadores activos' + (act % 2 ? ' (uno tendrá bye, el último sin bye previo)' : '') + '. Ronda ' + n + ' de ' + E.config.rondas_suizas + ' · ' + E.config.duracion_min + ' min.</p>';
-      else h += '<p class="nota" style="margin-top:6px">Se cruzan según la clasificación suiza. Al mejor de tres, sin empates.</p>';
+      else h += '<p class="nota" style="margin-top:6px">Se cruzan según la clasificación suiza. Al mejor de tres, sin empates. Entran ' + slugsPara(E, 'top').length + ' mazos (se eligen en Más › Mazos en juego).</p>';
       if (act < 2) h += '<p class="aviso">Hacen falta al menos dos jugadores.</p>';
       h += '<div class="botonera" style="justify-content:flex-start"><button class="oro" type="button" id="btn-emparejar"' + (act < 2 ? ' disabled' : '') + '>Emparejar y sortear mazos</button></div></div>';
     } else if (!sig && !E.terminado && r && r.estado === 'cerrada') {
@@ -357,7 +375,7 @@
   }
   function selMazo(r, m, lado){
     var id = lado === 'a' ? m.a : m.b, val = lado === 'a' ? m.ma : m.mb;
-    var pos = T.mazosPosibles(E, r, id, slugs());
+    var pos = T.mazosPosibles(E, r, id, slugsPara(E, r.tipo));
     if (val && pos.indexOf(val) < 0) pos.unshift(val);
     return '<select data-mazo="' + lado + '" data-mesa="' + m.mesa + '">' + (val ? '' : '<option value="">— sin mazo —</option>') + pos.map(function(s){ return '<option value="' + s + '"' + (s === val ? ' selected' : '') + '>' + esc(nomMazo(s)) + '</option>'; }).join('') + '</select>';
   }
@@ -394,14 +412,14 @@
         rr.mesas.forEach(function(m){ ['a','b'].forEach(function(l){ if (m[l] === '__x') m[l] = id; }); });
         // el mazo se queda en la silla, no en la persona: si ahora repite, se vuelve a sortear esa mesa
         rr.mesas.forEach(function(m){ ['a','b'].forEach(function(l){ var jid = m[l], ml = 'm' + l; if (jid && m[ml] && T.mazosJugados(e, jid, rr)[m[ml]]) m[ml] = null; }); });
-        rr.mesas.forEach(function(m){ ['a','b'].forEach(function(l){ var ml = 'm' + l; if (m[l] && m.b && !m[ml]) { var p = T.mazosPosibles(e, rr, m[l], slugs()); m[ml] = p[Math.floor(Math.random()*p.length)] || null; } }); });
+        rr.mesas.forEach(function(m){ ['a','b'].forEach(function(l){ var ml = 'm' + l; if (m[l] && m.b && !m[ml]) { var p = T.mazosPosibles(e, rr, m[l], slugsPara(e, rr.tipo)); m[ml] = p[Math.floor(Math.random()*p.length)] || null; } }); });
       });
       return;
     }
     if (!b) return;
-    if (b.id === 'btn-emparejar') accion('Ronda emparejada (borrador)', function(e){ var tipo = T.siguienteTipo(e); if (!tipo) return false; var nr = T.emparejar(e, tipo); nr.estado = 'borrador'; if (!T.asignarMazos(e, nr, slugs())) toast('No hay mazos suficientes sin repetir: revisa', true); e.rondas.push(nr); });
-    else if (b.id === 'btn-reemparejar') accion('Vuelto a emparejar', function(e){ var old = e.rondas.pop(); var nr = T.emparejar(e, old.tipo); nr.estado = 'borrador'; T.asignarMazos(e, nr, slugs()); e.rondas.push(nr); });
-    else if (b.id === 'btn-remazos') accion('Mazos sorteados de nuevo', function(e){ var rr = T.rondaActual(e); rr.mesas.forEach(function(m){ m.ma = null; m.mb = null; }); T.asignarMazos(e, rr, slugs()); });
+    if (b.id === 'btn-emparejar') accion('Ronda emparejada (borrador)', function(e){ var tipo = T.siguienteTipo(e); if (!tipo) return false; var nr = T.emparejar(e, tipo); nr.estado = 'borrador'; if (!T.asignarMazos(e, nr, slugsPara(e, tipo))) toast('No hay mazos suficientes sin repetir: revisa las mesas sin mazo o abre más mazos en Más > Mazos', true); e.rondas.push(nr); });
+    else if (b.id === 'btn-reemparejar') accion('Vuelto a emparejar', function(e){ var old = e.rondas.pop(); var nr = T.emparejar(e, old.tipo); nr.estado = 'borrador'; T.asignarMazos(e, nr, slugsPara(e, old.tipo)); e.rondas.push(nr); });
+    else if (b.id === 'btn-remazos') accion('Mazos sorteados de nuevo', function(e){ var rr = T.rondaActual(e); rr.mesas.forEach(function(m){ m.ma = null; m.mb = null; }); T.asignarMazos(e, rr, slugsPara(e, rr.tipo)); });
     else if (b.id === 'btn-descartar') { if (confirm('¿Descartar este borrador?')) accion('Borrador descartado', function(e){ e.rondas.pop(); }); }
     else if (b.id === 'btn-publicar') accion(T.nombreRonda(r) + ' publicada', function(e){ var rr = T.rondaActual(e); if (rr.mesas.some(function(m){ return m.b && (!m.ma || !m.mb); })) { toast('Hay mesas sin mazo', true); return false; } rr.estado = 'publicada'; });
     else if (b.id === 'btn-despublicar') { if (confirm('Los jugadores dejarán de ver la ronda. ¿Volver a borrador?')) accion('Ronda vuelta a borrador', function(e){ var rr = T.rondaActual(e); rr.estado = 'borrador'; rr.temporizador.fin = null; rr.temporizador.restante_ms = null; }); }
@@ -465,8 +483,42 @@
   }
   $('#v-clasif').addEventListener('click', function(ev){ var b = ev.target.closest('button'); if (!b) return; if (b.id === 'btn-clas-wa') window.open('https://wa.me/?text=' + encodeURIComponent(textoClasif()), '_blank'); if (b.id === 'btn-clas-copiar') navigator.clipboard.writeText(textoClasif()).then(function(){ toast('Copiado'); }); });
 
+  /* mazos en juego */
+  function renderMazos(){
+    var fs = fuera(E, 'suiza'), ft = fuera(E, 'top'), uso = {};
+    E.rondas.forEach(function(r){ r.mesas.forEach(function(m){ if (m.ma) uso[m.ma] = (uso[m.ma] || 0) + 1; if (m.mb) uso[m.mb] = (uso[m.mb] || 0) + 1; }); });
+    var h = '<div class="mz-fila cab"><span>Mazo</span><span style="text-align:center">Suizas</span><span style="text-align:center">Top</span></div>';
+    MAZOS.forEach(function(x){
+      var enS = fs.indexOf(x.id) < 0, enT = ft.indexOf(x.id) < 0;
+      h += '<div class="mz-fila' + (enT ? '' : ' fuera-top') + '"><span class="nm">' + esc(x.n) + '<small>' + esc(x.t) + (uso[x.id] ? ' · jugado ' + uso[x.id] + (uso[x.id] > 1 ? ' veces' : ' vez') : '') + '</small></span>'
+        + '<label class="' + (enS ? 'on' : '') + '"><input type="checkbox" data-mz="suiza" data-id="' + x.id + '"' + (enS ? ' checked' : '') + '>' + (enS ? 'Sí' : 'No') + '</label>'
+        + '<label class="' + (enT ? 'on' : '') + '"><input type="checkbox" data-mz="top" data-id="' + x.id + '"' + (enT ? ' checked' : '') + '>' + (enT ? 'Sí' : 'No') + '</label></div>';
+    });
+    $('#mazos-lista').innerHTML = h;
+    // aviso: ¿con los mazos marcados hay reparto posible para el Top con los que ahora van arriba?
+    var top = +E.config.top || 0, nS = slugsPara(E, 'suiza').length, nT = slugsPara(E, 'top').length, txt = nS + ' mazos en las suizas · ' + nT + ' en el Top.';
+    if (top && !E.terminado && T.activos(E).length >= top) {
+      var e2 = clon(E), prueba = T.emparejar(e2, top >= 8 ? 'cuartos' : top >= 4 ? 'semifinal' : 'final'), ok = T.asignarMazos(e2, prueba, slugsPara(e2, 'top'));
+      var sin = prueba.mesas.filter(function(m){ return m.b && (!m.ma || !m.mb); }).length;
+      txt += ok ? ' Con la clasificación de ahora, los ' + top + ' del Top tendrían mazo sin repetir.' : ' ⚠ Con la clasificación de ahora no hay reparto sin repetir para el Top (' + sin + ' mesa' + (sin > 1 ? 's' : '') + ' sin mazo): abre algún mazo más.';
+    }
+    $('#mazos-aviso').textContent = txt;
+  }
+  $('#v-mas').addEventListener('change', function(ev){
+    var c = ev.target.closest('input[data-mz]'); if (!c) return;
+    var campo = c.dataset.mz === 'suiza' ? 'mazos_fuera_suizas' : 'mazos_fuera_top', id = c.dataset.id, on = c.checked;
+    accion((on ? 'Entra ' : 'Fuera ') + nomMazo(id) + (c.dataset.mz === 'top' ? ' (Top)' : ' (suizas)'), function(e){ var l = (e.config[campo] || []).filter(function(s){ return s !== id; }); if (!on) l.push(id); e.config[campo] = l; });
+  });
+  $('#v-mas').addEventListener('click', function(ev){
+    var b = ev.target.closest('button[data-mz-todos],button[data-mz-ninguno]'); if (!b) return;
+    var fase = b.dataset.mzTodos || b.dataset.mzNinguno, campo = fase === 'suiza' ? 'mazos_fuera_suizas' : 'mazos_fuera_top';
+    if (b.dataset.mzNinguno && !confirm('¿Dejar el Top sin ningún mazo? Luego marca los que quieras.')) return;
+    accion(b.dataset.mzTodos ? 'Todos los mazos dentro' : 'Todos los mazos fuera del Top', function(e){ e.config[campo] = b.dataset.mzTodos ? [] : slugs(); });
+  });
+
   /* ajustes */
   function renderAjustes(){
+    renderMazos();
     $('#c-rondas').value = E.config.rondas_suizas; $('#c-duracion').value = E.config.duracion_min; $('#c-top').value = E.config.top; $('#c-plazas').value = E.config.plazas || 20;
     var act = T.activos(E).length; $('#nota-rondas').textContent = (act ? 'Con ' + act + ' jugadores lo normal son ' + T.rondasSugeridas(act) + ' rondas suizas. ' : '') + 'Las rondas ya cerradas no cambian.';
     $('#btn-reabrir').disabled = !(T.rondaActual(E) && T.rondaActual(E).estado === 'cerrada');
