@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Modern 2015 Invitational</title>
-<meta name="description" content="Torneo de Magic en Cartinha Brilhante (Almería), sábado 19 de septiembre a las 17:00. Veinte mazos del Modern de 2015 sorteados en cada ronda, con la ficha de cada uno. 20 plazas, 10 €.">
+<meta name="description" content="Torneo de Magic en Cartinha Brilhante (Almería), sábado 19 de septiembre de 2026. Veinte mazos del Modern de 2015 sorteados en cada ronda. Campeón: Javi del Pino, con Affinity en la final.">
 <meta property="og:title" content="Modern 2015 Invitational">
-<meta property="og:description" content="Sábado 19 de septiembre, 17:00, Cartinha Brilhante (Almería). Veinte mazos del Modern de 2015 sorteados en cada ronda. 20 plazas, 10 €.">
+<meta property="og:description" content="Cartinha Brilhante (Almería), 19 de septiembre de 2026. Veinte mazos del Modern de 2015 sorteados en cada ronda. Campeón: Javi del Pino.">
 <meta property="og:image" content="https://tubitas.github.io/modern-2015-invitational/img/cartel.webp">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0A0908">
@@ -58,7 +58,6 @@
   .menu-lista a{font-family:var(--util);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--pergamino);text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid transparent}
   .menu-lista a:hover{color:var(--oro-claro);border-bottom-color:var(--oro-tenue)}
   .pill{font-family:var(--util);font-size:12px;letter-spacing:.08em;background:var(--oro);color:var(--tinta);padding:2px 8px;border-radius:999px;font-weight:600}
-  .pill.ultimas{background:var(--brasa);color:var(--pergamino)}
   .menu-boton{display:none}
   @media(max-width:820px){
     .menu-boton{display:inline-block}
@@ -92,24 +91,56 @@
   .dato .v{font-family:var(--display);font-size:1.15rem;color:var(--oro-claro);line-height:1.25}
   .dato .n{font-size:.86rem;color:var(--pergamino-2);font-style:italic}
 
-  /* plazas */
-  .plazas{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
-  @media(min-width:760px){.plazas{grid-template-columns:320px 1fr;gap:64px}}
-  .anillo{position:relative;width:min(320px,80vw);margin:0 auto}
-  .anillo svg{width:100%;height:auto;display:block}
-  .anillo .seg{stroke:var(--tinta-3);stroke-width:14;fill:none;stroke-linecap:butt;transition:stroke .45s ease}
-  .anillo .seg.libre{stroke:var(--oro)}
-  .anillo .seg.ocupada{stroke:var(--oro-tenue);opacity:.45}
-  .anillo.ultimas .seg.libre{stroke:var(--brasa)}
-  .anillo .centro{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center}
-  .anillo .cifra{font-family:var(--display);font-size:clamp(3.4rem,14vw,5.2rem);line-height:1;color:var(--oro-claro);font-variant-numeric:tabular-nums}
-  .anillo.ultimas .cifra{color:var(--brasa)}
-  .anillo .de{font-family:var(--util);letter-spacing:.24em;text-transform:uppercase;color:var(--oro-tenue);font-size:13px}
-  .plazas-texto{display:flex;flex-direction:column;gap:16px}
-  .plazas-texto p{color:var(--pergamino-2);max-width:52ch}
-  .plazas-texto .estado{font-family:var(--display);font-size:1.3rem;color:var(--oro-claro);letter-spacing:.03em}
-  .plazas-texto .fecha{font-family:var(--util);letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--oro-tenue)}
-
+  /* campeón */
+  .campeon-sec{position:relative;overflow:hidden;border:1px solid var(--linea);background:var(--tinta-2);margin-top:44px;padding:clamp(56px,9vw,120px) clamp(20px,5vw,64px);text-align:center;isolation:isolate}
+  .campeon-fondo{position:absolute;inset:0;z-index:-2;overflow:hidden}
+  .campeon-fondo img{width:100%;height:100%;object-fit:cover;opacity:.3;transform:scale(1.06);filter:saturate(.9) blur(1.5px)}
+  .campeon-sec.on .campeon-fondo img{animation:kenburns 28s ease-in-out infinite alternate}
+  @keyframes kenburns{from{transform:scale(1.06) translate(0,0)}to{transform:scale(1.16) translate(-1.5%,1.5%)}}
+  .campeon-sec::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 42%,rgba(200,164,76,.18),transparent 55%),linear-gradient(180deg,rgba(10,9,8,.55),rgba(10,9,8,.35) 40%,rgba(10,9,8,.8))}
+  .campeon-int{position:relative;max-width:820px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .campeon-eyebrow,.campeon-k,.campeon-lema,.campeon-podio,.campeon-premio{opacity:0;transform:translateY(14px)}
+  .campeon-sec.on .campeon-eyebrow{animation:entra .8s ease forwards .1s}
+  .campeon-sec.on .campeon-k{animation:entra .8s ease forwards .3s}
+  .campeon-sec.on .campeon-lema{animation:entra .8s ease forwards 1.5s}
+  .campeon-sec.on .campeon-podio{animation:entra .8s ease forwards 2.6s}
+  .campeon-sec.on .campeon-premio{animation:entra .8s ease forwards 2.8s}
+  .campeon-k{font-family:var(--util);font-size:15px;letter-spacing:.42em;text-transform:uppercase;color:var(--oro)}
+  .campeon-k::before,.campeon-k::after{content:"";display:inline-block;width:38px;height:1px;background:var(--oro-tenue);vertical-align:middle;margin:0 14px}
+  .campeon-nombre{font-family:var(--display);font-weight:600;font-size:clamp(3rem,10vw,6.4rem);line-height:1;letter-spacing:.04em;text-transform:uppercase;margin:6px 0 4px;text-wrap:balance}
+  .campeon-nombre .linea{display:inline-block;white-space:nowrap}
+  .campeon-nombre span span{display:inline-block;color:var(--oro-claro);background:linear-gradient(105deg,var(--oro-tenue) 0%,var(--oro) 30%,#FFF1C2 50%,var(--oro) 70%,var(--oro-tenue) 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;opacity:0;transform:translateY(.45em) rotateX(-70deg);transform-origin:50% 100%}
+  .campeon-nombre .esp{display:inline-block;width:.32em}
+  .campeon-sec.on .campeon-nombre span span{animation:letra .75s cubic-bezier(.2,.8,.2,1) forwards calc(.5s + var(--i) * 70ms),brillo 5.5s linear infinite calc(1.4s + var(--i) * -90ms)}
+  @keyframes letra{to{opacity:1;transform:none}}
+  @keyframes brillo{0%{background-position:100% 0}100%{background-position:-160% 0}}
+  .campeon-halo{position:absolute;left:50%;top:38%;width:min(720px,90vw);height:220px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(200,164,76,.28),transparent 65%);filter:blur(10px);pointer-events:none;z-index:-1;animation:respira 7s ease-in-out infinite}
+  .campeon-lema{font-style:italic;font-size:1.15rem;color:var(--pergamino-2);max-width:44ch}
+  .senda{list-style:none;margin:26px 0 8px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:640px}
+  .senda li{display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transform:translateY(22px)}
+  .campeon-sec.on .senda li{animation:entra .8s cubic-bezier(.2,.8,.2,1) forwards calc(1.8s + var(--i) * .28s)}
+  .senda .carta{display:block;width:min(150px,100%);aspect-ratio:360/510;overflow:hidden;border:1px solid var(--linea);box-shadow:var(--sombra);clip-path:inset(100% 0 0 0)}
+  .campeon-sec.on .senda .carta{animation:destapa 1s cubic-bezier(.2,.8,.2,1) forwards calc(2s + var(--i) * .28s)}
+  @keyframes destapa{to{clip-path:inset(0 0 0 0)}}
+  .senda .carta img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform .5s ease}
+  .campeon-sec.on .senda .carta img{animation:acerca 1.4s cubic-bezier(.2,.8,.2,1) forwards calc(2s + var(--i) * .28s)}
+  @keyframes acerca{to{transform:scale(1)}}
+  .senda li.final .carta{border-color:var(--oro);box-shadow:0 0 0 1px rgba(200,164,76,.35),0 0 40px rgba(200,164,76,.28),var(--sombra)}
+  .campeon-sec.on .senda li.final .carta{animation:destapa 1s cubic-bezier(.2,.8,.2,1) forwards calc(2s + var(--i) * .28s),latido 3.2s ease-in-out infinite 3.2s}
+  @keyframes latido{0%,100%{box-shadow:0 0 0 1px rgba(200,164,76,.35),0 0 26px rgba(200,164,76,.2),var(--sombra)}50%{box-shadow:0 0 0 1px rgba(232,214,166,.7),0 0 56px rgba(200,164,76,.5),var(--sombra)}}
+  .senda .txt{display:flex;flex-direction:column;gap:2px;line-height:1.25}
+  .senda .ronda{font-family:var(--util);font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--oro-tenue)}
+  .senda .mazo{font-family:var(--display);font-size:1.02rem;letter-spacing:.06em;text-transform:uppercase;color:var(--oro-claro)}
+  .senda .res{font-size:.92rem;color:var(--pergamino-2)}
+  .senda li.final .ronda{color:var(--oro)}
+  .campeon-podio{color:var(--pergamino-2);margin-top:8px}
+  .campeon-podio b{font-weight:500;color:var(--pergamino)}
+  .campeon-premio{font-family:var(--util);font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro-tenue)}
+  .chispas{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .chispas i{position:absolute;bottom:-8px;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;background:var(--oro-claro);box-shadow:0 0 8px 2px rgba(232,214,166,.55);opacity:0}
+  .campeon-sec.on .chispas i{animation:chispa var(--d) linear var(--r) infinite}
+  @keyframes chispa{0%{transform:translate(0,0) scale(.5);opacity:0}12%{opacity:.9}60%{opacity:.7}100%{transform:translate(var(--dx),-560px) scale(1.1);opacity:0}}
+  @media(max-width:520px){.senda{gap:10px}.senda .mazo{font-size:.9rem}.senda .res{font-size:.84rem}.campeon-k::before,.campeon-k::after{width:22px;margin:0 8px}}
   /* sorteo: lista de términos */
   .terminos{display:grid;gap:0;border-top:1px solid var(--linea)}
   .terminos > div{display:grid;grid-template-columns:1fr;gap:6px;padding:24px 0;border-bottom:1px solid var(--linea-suave)}
@@ -250,8 +281,6 @@
   .contacto{display:grid;grid-template-columns:1fr;gap:36px}
   @media(min-width:760px){.contacto{grid-template-columns:1fr 1fr;gap:56px}}
   .contacto .bloque p{color:var(--pergamino-2);max-width:46ch}
-  .precio{font-family:var(--display);font-size:clamp(2.4rem,6vw,3.6rem);color:var(--oro-claro);line-height:1}
-  .plazas-linea{font-family:var(--util);letter-spacing:.24em;text-transform:uppercase;color:var(--oro-tenue);font-size:14px}
   .contacto address{font-style:normal;color:var(--pergamino-2);display:flex;flex-direction:column;gap:6px}
 
   footer{border-top:1px solid var(--linea);padding:40px 0 56px;text-align:center;color:var(--pergamino-2);font-family:var(--util);letter-spacing:.16em;text-transform:uppercase;font-size:13.5px;line-height:2}
@@ -305,6 +334,8 @@
     html{scroll-behavior:auto}
     html.js .rev{opacity:1;transform:none}
     .entra{opacity:1;transform:none}
+    .campeon-eyebrow,.campeon-k,.campeon-lema,.campeon-podio,.campeon-premio,.campeon-nombre span span,.senda li{opacity:1;transform:none}
+    .senda .carta{clip-path:none}.senda .carta img{transform:none}.chispas{display:none}
   }
 </style>
 </head>
@@ -315,9 +346,9 @@
     <a class="marca" href="#portada"><img src="img/emblema.webp" alt="" width="34" height="34"><span>Modern 2015</span></a>
     <button class="menu-boton util" type="button" id="menu-boton" aria-expanded="false" aria-controls="menu-lista">Menú</button>
     <ul class="menu-lista" id="menu-lista">
+      <li><a href="#campeon">Campeón</a></li>
       <li id="menu-en-juego" hidden><a href="#en-juego">En juego <span class="pill reloj-pill" id="menu-reloj" hidden>00:00</span></a></li>
       <li><a href="#fotos">Fotos</a></li>
-      <li><a href="#plazas">Plazas <span class="pill" data-libres-pill>15 libres</span></a></li>
       <li><a href="#simulador">Simulador</a></li>
       <li><a href="#mazos">Mazos</a></li>
       <li><a href="#como-se-juega">Cómo se juega</a></li>
@@ -341,7 +372,7 @@
       <p class="capitulo entra e4">The Golden Age Returns · Chapter I</p>
       <p class="lema entra e5">Veinte mazos del Modern de 2015. Nadie trae mazo de casa y nadie elige el suyo: cada ronda se sortea.</p>
       <div class="acciones entra e5">
-        <a class="enlace-suave" href="#plazas">Reservar plaza</a>
+        <a class="enlace-suave" href="#campeon">El campeón</a>
         <a class="enlace-suave" href="#mazos">Ver los mazos</a>
       </div>
     </div>
@@ -354,9 +385,28 @@
     <div class="dato"><span class="k">Fecha</span><span class="v">Sábado 19 de septiembre</span><span class="n">de 2026</span></div>
     <div class="dato"><span class="k">Hora</span><span class="v">17:00 h</span></div>
     <div class="dato"><span class="k">Lugar</span><span class="v">Cartinha Brilhante</span><span class="n"><a href="https://maps.google.com/?q=Av.+Federico+Garc%C3%ADa+Lorca+165,+04008+Almer%C3%ADa" target="_blank" rel="noopener">Av. Federico García Lorca 165, Almería</a></span></div>
-    <a class="dato" href="#plazas"><span class="k">Plazas</span><span class="v" data-libres-texto>15 libres de 20</span><span class="n">Una por mazo</span></a>
+    <a class="dato" href="#campeon"><span class="k">Campeón</span><span class="v">Javi del Pino</span><span class="n">Affinity en la final</span></a>
     <div class="dato"><span class="k">Inscripción</span><span class="v">10 €</span><span class="n">Mazo incluido</span></div>
   </div>
+
+  <section id="campeon" class="campeon-sec" aria-labelledby="campeon-titulo">
+    <div class="campeon-fondo" aria-hidden="true"><img src="img/tapete.webp" alt="" width="1200" height="675"></div>
+    <div class="campeon-halo" aria-hidden="true"></div>
+    <div class="chispas" aria-hidden="true"><i style="--x:6%;--d:9s;--r:0s;--dx:30px;--s:4px"></i><i style="--x:14%;--d:11s;--r:2.5s;--dx:-20px;--s:3px"></i><i style="--x:22%;--d:8s;--r:1s;--dx:15px;--s:5px"></i><i style="--x:31%;--d:12s;--r:4s;--dx:-35px;--s:3px"></i><i style="--x:39%;--d:9.5s;--r:0.5s;--dx:25px;--s:4px"></i><i style="--x:47%;--d:10.5s;--r:3s;--dx:-10px;--s:3px"></i><i style="--x:55%;--d:8.5s;--r:1.8s;--dx:40px;--s:4px"></i><i style="--x:63%;--d:11.5s;--r:0.2s;--dx:-25px;--s:5px"></i><i style="--x:71%;--d:9s;--r:2.2s;--dx:10px;--s:3px"></i><i style="--x:79%;--d:10s;--r:3.6s;--dx:-30px;--s:4px"></i><i style="--x:87%;--d:8s;--r:1.4s;--dx:20px;--s:3px"></i><i style="--x:94%;--d:12s;--r:2.8s;--dx:-15px;--s:4px"></i><i style="--x:26%;--d:13s;--r:5s;--dx:5px;--s:3px"></i><i style="--x:68%;--d:13.5s;--r:5.5s;--dx:-5px;--s:3px"></i></div>
+    <div class="campeon-int">
+      <p class="eyebrow campeon-eyebrow">The Golden Age Returns · Chapter I</p>
+      <p class="campeon-k">Campeón</p>
+      <h2 id="campeon-titulo" class="campeon-nombre" aria-label="Javi del Pino"><span class="linea" aria-hidden="true"><span style="--i:0">J</span><span style="--i:1">a</span><span style="--i:2">v</span><span style="--i:3">i</span></span> <span class="linea" aria-hidden="true"><span style="--i:0">d</span><span style="--i:1">e</span><span style="--i:2">l</span><span class="esp"> </span><span style="--i:3">P</span><span style="--i:4">i</span><span style="--i:5">n</span><span style="--i:6">o</span></span></h2>
+      <p class="campeon-lema">Ganó la final 2-0 con Affinity. Después de los cuartos no volvió a perder una partida.</p>
+      <ol class="senda" aria-label="El camino del campeón en la eliminatoria">
+        <li style="--i:0"><span class="carta"><img src="img/jund-front.webp" alt="Portada del mazo Jund" width="360" height="510" loading="lazy"></span><span class="txt"><span class="ronda">Cuartos</span><span class="mazo">Jund</span><span class="res">2-1 a Agustín</span></span></li>
+        <li style="--i:1"><span class="carta"><img src="img/living-end-front.webp" alt="Portada del mazo Living End" width="360" height="510" loading="lazy"></span><span class="txt"><span class="ronda">Semifinal</span><span class="mazo">Living End</span><span class="res">2-0 a Jomy</span></span></li>
+        <li style="--i:2" class="final"><span class="carta"><img src="img/affinity-front.webp" alt="Portada del mazo Affinity" width="360" height="510" loading="lazy"></span><span class="txt"><span class="ronda">Final</span><span class="mazo">Affinity</span><span class="res">2-0 a Juan Andrés Peña</span></span></li>
+      </ol>
+      <p class="campeon-podio">Finalista, <b>Juan Andrés Peña</b> · Semifinalistas, <b>Jomy</b> y <b>Joserra</b></p>
+      <p class="campeon-premio">Se lleva el tapete del campeón y el 30 % del material de tienda.</p>
+    </div>
+  </section>
 
   <section id="en-juego" hidden>
     <div class="cabecera-seccion">
@@ -392,46 +442,6 @@
       <button type="button" class="" data-foto="6"><img src="img/foto-07.webp" alt="Partida sobre un tapete del Hellfire Club, con fundas rojas y dados" width="1400" height="1050" loading="lazy"></button>
       <button type="button" class="" data-foto="7"><img src="img/foto-08.webp" alt="Detalle de un tapete con un autómata, la bolsa de dados y el contador de vidas a 20" width="1400" height="1050" loading="lazy"></button>
       <button type="button" class="" data-foto="8"><img src="img/foto-09.webp" alt="Un jugador coloca una carta sobre un tapete azul, con la hoja de vidas debajo" width="1400" height="1050" loading="lazy"></button>
-    </div>
-  </section>
-
-  <section id="plazas">
-    <div class="plazas">
-      <div class="anillo rev" id="anillo" data-total="20" data-apuntados="5">
-        <svg viewBox="0 0 220 220" aria-hidden="true">
-          <path class="seg" d="M110.90 14.00 A96 96 0 0 1 138.80 18.42"/>
-          <path class="seg" d="M140.52 18.98 A96 96 0 0 1 165.69 31.81"/>
-          <path class="seg" d="M167.16 32.87 A96 96 0 0 1 187.13 52.84"/>
-          <path class="seg" d="M188.19 54.31 A96 96 0 0 1 201.02 79.48"/>
-          <path class="seg" d="M201.58 81.20 A96 96 0 0 1 206.00 109.10"/>
-          <path class="seg" d="M206.00 110.90 A96 96 0 0 1 201.58 138.80"/>
-          <path class="seg" d="M201.02 140.52 A96 96 0 0 1 188.19 165.69"/>
-          <path class="seg" d="M187.13 167.16 A96 96 0 0 1 167.16 187.13"/>
-          <path class="seg" d="M165.69 188.19 A96 96 0 0 1 140.52 201.02"/>
-          <path class="seg" d="M138.80 201.58 A96 96 0 0 1 110.90 206.00"/>
-          <path class="seg" d="M109.10 206.00 A96 96 0 0 1 81.20 201.58"/>
-          <path class="seg" d="M79.48 201.02 A96 96 0 0 1 54.31 188.19"/>
-          <path class="seg" d="M52.84 187.13 A96 96 0 0 1 32.87 167.16"/>
-          <path class="seg" d="M31.81 165.69 A96 96 0 0 1 18.98 140.52"/>
-          <path class="seg" d="M18.42 138.80 A96 96 0 0 1 14.00 110.90"/>
-          <path class="seg" d="M14.00 109.10 A96 96 0 0 1 18.42 81.20"/>
-          <path class="seg" d="M18.98 79.48 A96 96 0 0 1 31.81 54.31"/>
-          <path class="seg" d="M32.87 52.84 A96 96 0 0 1 52.84 32.87"/>
-          <path class="seg" d="M54.31 31.81 A96 96 0 0 1 79.48 18.98"/>
-          <path class="seg" d="M81.20 18.42 A96 96 0 0 1 109.10 14.00"/>
-        </svg>
-        <div class="centro">
-          <span class="cifra" data-libres-cifra>15</span>
-          <span class="de">plazas libres</span>
-        </div>
-      </div>
-      <div class="plazas-texto rev">
-        <h2>Quedan plazas</h2>
-        <p class="estado" data-estado>5 apuntados de 20</p>
-        <p>Veinte mazos, veinte sillas. Cuando se llena, se cierra: no hay lista de espera con mazo garantizado. La plaza se reserva escribiendo a Jomy y se paga el mismo día.</p>
-        <p class="fecha" data-actualizado>Actualizado el 5 de septiembre</p>
-        <div><a class="boton" href="https://wa.me/34687300243?text=Hola%20Jomy%2C%20quiero%20reservar%20plaza%20en%20el%20Modern%202015%20Invitational" target="_blank" rel="noopener">Reservar plaza por WhatsApp</a></div>
-      </div>
     </div>
   </section>
 
@@ -617,10 +627,8 @@
     </div>
     <div class="contacto">
       <div class="bloque rev">
-        <p class="precio">10 €</p>
-        <p class="plazas-linea"><span data-libres-texto>15 libres de 20</span> · mazo incluido</p>
-        <p>No hace falta tener mazo ni haber jugado Modern nunca. El mazo te lo dan al llegar.</p>
-        <p>La plaza se reserva con Jomy: por <a href="https://wa.me/34687300243?text=Hola%20Jomy%2C%20quiero%20reservar%20plaza%20en%20el%20Modern%202015%20Invitational" target="_blank" rel="noopener">WhatsApp</a> o llamando al <a href="tel:+34687300243">687 300 243</a>.</p>
+        <h3>Jomy Tournaments</h3>
+        <p>El Chapter I se jugó el 19 de septiembre con 14 jugadores. Si quieres saber del siguiente, escribe a Jomy por <a href="https://wa.me/34687300243?text=Hola%20Jomy%2C%20quiero%20reservar%20plaza%20en%20el%20Modern%202015%20Invitational" target="_blank" rel="noopener">WhatsApp</a> o llama al <a href="tel:+34687300243">687 300 243</a>.</p>
       </div>
       <div class="bloque rev">
         <h3>Cartinha Brilhante</h3>
@@ -695,38 +703,14 @@
     setTimeout(verTodo, 4000);
   }
 
-  /* contador de plazas */
-  var anillo=document.getElementById('anillo');
-  function pintaPlazas(total, apuntados, actualizado){
-    var libres=Math.max(0,total-apuntados);
-    var segs=anillo.querySelectorAll('.seg');
-    segs.forEach(function(s,i){ s.classList.remove('libre','ocupada'); s.classList.add(i<apuntados?'ocupada':'libre'); });
-    anillo.classList.toggle('ultimas', libres>0 && libres<=4);
-    var texto=libres===0?'Completo':(libres+' libres de '+total);
-    document.querySelectorAll('[data-libres-texto]').forEach(function(e){ e.textContent=texto; });
-    document.querySelectorAll('[data-libres-pill]').forEach(function(e){ e.textContent=libres===0?'Completo':(libres+' libres'); e.classList.toggle('ultimas', libres>0 && libres<=4); });
-    var est=document.querySelector('[data-estado]'); if(est) est.textContent=libres===0?'Las veinte plazas están cubiertas':(apuntados+' apuntados de '+total);
-    var h2=document.querySelector('#plazas h2'); if(h2) h2.textContent=libres===0?'Completo':(libres<=4?'Últimas plazas':'Quedan plazas');
-    if(actualizado){ var a=document.querySelector('[data-actualizado]'); if(a) a.textContent='Actualizado el '+actualizado; }
-    var cifra=document.querySelector('[data-libres-cifra]');
-    if(reduce){ cifra.textContent=libres; return; }
-    var t0=null, dur=900;
-    function paso(t){ if(!t0) t0=t; var k=Math.min(1,(t-t0)/dur); k=1-Math.pow(1-k,3); cifra.textContent=Math.round(k*libres); if(k<1) requestAnimationFrame(paso); }
-    requestAnimationFrame(paso);
-  }
-  var total=+anillo.getAttribute('data-total'), apuntados=+anillo.getAttribute('data-apuntados');
-  var pintado=false;
-  function arranca(){ if(pintado) return; pintado=true; pintaPlazas(total, apuntados, null); }
-  if(reduce || !('IntersectionObserver' in window)) arranca();
-  else{ var io2=new IntersectionObserver(function(es){ if(es.some(function(e){return e.isIntersecting;})){ arranca(); io2.disconnect(); } },{threshold:.3}); io2.observe(anillo); setTimeout(arranca, 5000); }
-  fetch('plazas.json?t='+Date.now(),{cache:'no-store'}).then(function(r){ return r.ok?r.json():null; }).then(function(d){
-    if(!d||typeof d.apuntados!=='number'||window.__plazasTorneo) return;
-    total=d.total||20; apuntados=d.apuntados; pintado=false;
-    var f=d.actualizado? new Date(d.actualizado+'T12:00:00') : null;
-    var meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-    var txt=f&&!isNaN(f)? (f.getDate()+' de '+meses[f.getMonth()]) : null;
-    pintado=true; pintaPlazas(total, apuntados, txt);
-  }).catch(function(){});
+  /* campeón: arranca el movimiento al verse (o ya, si no hay observer) */
+  (function(){
+    var c=document.getElementById('campeon'); if(!c) return;
+    function on(){ c.classList.add('on'); }
+    if(reduce || !('IntersectionObserver' in window)) return on();
+    var io3=new IntersectionObserver(function(es){ if(es.some(function(e){return e.isIntersecting;})){ on(); io3.disconnect(); } },{threshold:.25});
+    io3.observe(c); setTimeout(on, 6000);
+  })();
 
   /* datos de los mazos (para la ficha y el simulador) */
   var fichas=null;
@@ -826,12 +810,6 @@
     var esc=T.esc;
     function ronda(){ var r=T.rondaActual(E); return r && r.estado!=='borrador'? r : (T.rondasCerradas(E).slice(-1)[0]||null); }
 
-    function pintaPlazasDesdeTorneo(){
-      var inscritos=T.activos(E).length; if(!inscritos && !E.rondas.length) return;
-      window.__plazasTorneo=true; var tot=+E.config.plazas||20; total=tot; apuntados=inscritos; pintado=true;
-      var f=E.actualizado? new Date(E.actualizado) : null; var meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-      pintaPlazas(tot, inscritos, f&&!isNaN(f)? (f.getDate()+' de '+meses[f.getMonth()]) : null);
-    }
     function pintaMesas(){
       var r=ronda(), ul=$('ej-mesas'), q=filtro.trim().toLowerCase();
       if(!r){ // inscripción: lista de inscritos
@@ -893,14 +871,14 @@
     function pinta(){
       var f=T.fase(E), hay=E.rondas.some(function(x){ return x.estado!=='borrador'; })||E.terminado;
       var mostrar = hay || T.activos(E).length>0;
-      sec.hidden=!mostrar; menuItem.hidden=!hay;
+      sec.hidden=!mostrar; menuItem.hidden=!hay; if(E.terminado){ var ma=menuItem.querySelector('a'); if(ma&&ma.firstChild&&ma.firstChild.nodeType===3) ma.firstChild.nodeValue='Resultados '; }
       if(!mostrar) return;
       pintaCabecera(); pintaMesas(); pintaClasif(); tic();
     }
     var ultimaV=-1;
     function carga(primera){
       if(!primera && document.visibilityState==='hidden') return; // en segundo plano no se sondea
-      T.leer().then(function(d){ if(!d||!d.estado) return; E=d.estado; if(d.version!==ultimaV){ ultimaV=d.version; try{ pintaPlazasDesdeTorneo(); }catch(e){ console.error('plazas', e); } try{ pinta(); }catch(e){ console.error('en juego', e); } } }).catch(function(){});
+      T.leer().then(function(d){ if(!d||!d.estado) return; E=d.estado; if(d.version!==ultimaV){ ultimaV=d.version; try{ pinta(); }catch(e){ console.error('en juego', e); } } }).catch(function(){});
     }
     busca.addEventListener('input', function(){ filtro=busca.value; try{ localStorage.setItem('m2015_nombre', filtro); }catch(e){} if(E){ pintaMesas(); pintaClasif(); } });
     carga(true); setInterval(function(){ carga(false); }, 5000); setInterval(tic, 500);
