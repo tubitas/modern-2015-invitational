@@ -141,6 +141,23 @@
   .campeon-sec.on .chispas i{animation:chispa var(--d) linear var(--r) infinite}
   @keyframes chispa{0%{transform:translate(0,0) scale(.5);opacity:0}12%{opacity:.9}60%{opacity:.7}100%{transform:translate(var(--dx),-560px) scale(1.1);opacity:0}}
   @media(max-width:520px){.senda{gap:10px}.senda .mazo{font-size:.9rem}.senda .res{font-size:.84rem}.campeon-k::before,.campeon-k::after{width:22px;margin:0 8px}}
+  /* crónica */
+  .fecha-cronica{font-family:var(--util);letter-spacing:.2em;text-transform:uppercase;font-size:13px;color:var(--oro-tenue)}
+  .cronica{display:grid;grid-template-columns:1fr;gap:40px}
+  @media(min-width:860px){.cronica{grid-template-columns:minmax(0,1fr) 300px;gap:64px;align-items:start}}
+  .cronica-texto{max-width:64ch}
+  .cronica-texto p{margin:0 0 1.15em;color:var(--pergamino);font-size:1.08rem;line-height:1.7}
+  .cronica-texto p:first-child::first-letter{font-family:var(--display);font-size:3.6em;line-height:.8;float:left;padding:.08em .12em 0 0;color:var(--oro)}
+  .cronica-texto p:last-child{color:var(--oro-claro);font-style:italic}
+  .cronica-top{border:1px solid var(--linea);background:var(--tinta-2);padding:24px 22px}
+  @media(min-width:860px){.cronica-top{position:sticky;top:calc(var(--menu) + 16px)}}
+  .top8{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column}
+  .top8 li{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid var(--linea-suave)}
+  .top8 .n{font-family:var(--display);font-size:1.6rem;color:var(--oro);line-height:1}
+  .top8 li:first-child .n{color:var(--oro-claro);text-shadow:0 0 18px rgba(200,164,76,.45)}
+  .top8 .q{font-size:1.02rem;color:var(--pergamino);line-height:1.3}
+  .top8 small{display:block;font-family:var(--util);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--oro-tenue);margin-top:2px}
+  .nota-top{margin:16px 0 0;font-size:.9rem;color:var(--pergamino-2);line-height:1.5}
   /* sorteo: lista de términos */
   .terminos{display:grid;gap:0;border-top:1px solid var(--linea)}
   .terminos > div{display:grid;grid-template-columns:1fr;gap:6px;padding:24px 0;border-bottom:1px solid var(--linea-suave)}
@@ -347,6 +364,7 @@
     <button class="menu-boton util" type="button" id="menu-boton" aria-expanded="false" aria-controls="menu-lista">Menú</button>
     <ul class="menu-lista" id="menu-lista">
       <li><a href="#campeon">Campeón</a></li>
+      <li><a href="#cronica">Crónica</a></li>
       <li id="menu-en-juego" hidden><a href="#en-juego">En juego <span class="pill reloj-pill" id="menu-reloj" hidden>00:00</span></a></li>
       <li><a href="#fotos">Fotos</a></li>
       <li><a href="#simulador">Simulador</a></li>
@@ -405,6 +423,35 @@
       </ol>
       <p class="campeon-podio">Finalista, <b>Juan Andrés Peña</b> · Semifinalistas, <b>Jomy</b> y <b>Joserra</b></p>
       <p class="campeon-premio">Se lleva el tapete del campeón y el 30 % del material de tienda.</p>
+    </div>
+  </section>
+
+  <section id="cronica">
+    <div class="cabecera-seccion rev">
+      <h2>Crónica del Chapter I</h2>
+      <p class="fecha-cronica">Cartinha Brilhante, Almería. Sábado 19 de septiembre de 2026.</p>
+    </div>
+    <div class="cronica">
+      <div class="cronica-texto rev">
+        <p>A las cinco de la tarde había dieciséis nombres en la lista y veinte mazos de 2015 esperando en sus cajas, cada uno con su ficha encima. Once años dormidos. A las cinco y cuarto ya se barajaba en ocho mesas, y no volvió a haber silencio hasta la noche.</p>
+        <p>Salió todo. El sorteo, los relojes, las mesas, la clasificación en el móvil de cada uno entre ronda y ronda. Jomy fue el anfitrión perfecto: repartía los mazos, aclaraba las dudas, arrancaba el reloj y, en cuanto podía, se sentaba a jugar el suyo. Dieciséis personas con cartas de hace once años y ni una mala cara. En un torneo de Magic eso no se da por hecho.</p>
+        <p>El miedo tenía nombre y se sentó pronto en la mesa uno. Juanfra, con esa cara de Topuria que nadie quiso comentar en voz alta, ganó las cuatro rondas suizas seguidas: Bant, Red Deck Wins, Jeskai y Melira, cuatro mazos que no se parecen en nada y cuatro rivales que se levantaron de la mesa con el mismo gesto. Llegó al corte como primero, con la sala mirándolo de reojo.</p>
+        <p>Y sin embargo el campeón moral se fue antes del corte. Antoñico perdió la primera ronda por 2-1, se rehízo con dos 2-0 seguidos, con las Hadas y con el Tron, y cuando ya olía la clasificación miró el reloj: le tocaba el turno en la cafetería. Se fue con el torneo en la mano y sin haberlo tocado. Que quede escrito.</p>
+        <p>El Top 8 lo abrió el anfitrión. Jomy había entrado octavo, el último de la fila, y le tocó Juanfra. Con el PIF, el mazo que más cuentas pide de los veinte, le ganó 2-1 y dejó fuera al primero de las suizas en la primera eliminatoria. En las otras mesas, Juan Andrés Peña pasó por encima de Joe con el Death Cloud, Joserra dejó a cero a Rodri con las Hatebear y Javi del Pino le sacó un 2-1 a Agustín en un Jund contra Valakut que se fue a la tercera partida.</p>
+        <p>En semifinales, Javi repitió con Jomy lo de la segunda ronda, esta vez 2-0, Living End contra Melira, y Juan Andrés necesitó las tres partidas para pasar a Joserra con el Jeskai frente al Tron. La final tenía cuentas pendientes: en la tercera suiza, Juan Andrés había dejado a Javi a cero con el PIF. Esta vez tocó Affinity contra Abzan, y Affinity fue más rápido dos veces. Javi del Pino, campeón, con siete mazos distintos en siete rondas.</p>
+        <p>Cartinha Brilhante fue el sitio. Luz, mesas de sobra, el mural detrás y la tienda abierta, que tiene su peligro: los hijos de Híper Ocio entraron a mirar cartas de Magic y salieron con una afición nueva, el Pokémon. Llevan gastados quinientos euros en barajas, y eso que solo han pasado unas horas.</p>
+        <p>Esto es solo el principio. El Chapter II tendrá novedades y algunas cosas irán mejor, porque de esta tarde hemos apuntado lo que hay que cambiar. La idea sigue siendo la misma: veinte mazos de un formato que ya fue, y una tarde para volver a jugarlos.</p>
+      </div>
+      <aside class="cronica-top rev" aria-label="Así quedó el Top 8">
+        <h3>Así quedó el Top 8</h3>
+        <ol class="top8">
+          <li><span class="n">1</span><span class="q">Javi del Pino <small>Affinity en la final</small></span></li>
+          <li><span class="n">2</span><span class="q">Juan Andrés Peña <small>Abzan en la final</small></span></li>
+          <li><span class="n">3</span><span class="q">Joserra y Jomy <small>semifinalistas</small></span></li>
+          <li><span class="n">5</span><span class="q">Juanfra, Agustín, Rodri y Joe <small>cuartos</small></span></li>
+        </ol>
+        <p class="nota-top">Entraron al corte por este orden: Juanfra, Juan Andrés Peña, Joserra, Javi del Pino, Agustín, Rodri, Joe y Jomy.</p>
+      </aside>
     </div>
   </section>
 
