@@ -1,0 +1,122 @@
+[
+{
+"id": "abzan",
+"n": "Abzan",
+"t": "Midrange",
+"c": "wbg"
+},
+{
+"id": "death-cloud",
+"n": "Death Cloud",
+"t": "Control",
+"c": "bg"
+},
+{
+"id": "infect",
+"n": "Infect",
+"t": "Aggro-Combo",
+"c": "bg"
+},
+{
+"id": "jeskai",
+"n": "Jeskai",
+"t": "Control",
+"c": "urw"
+},
+{
+"id": "melira",
+"n": "Project Melira",
+"t": "Combo",
+"c": "gwb"
+},
+{
+"id": "pif",
+"n": "PIF Combo",
+"t": "Combo",
+"c": "ur"
+},
+{
+"id": "tezzerator",
+"n": "Tezzerator Prison",
+"t": "Control · Artefactos",
+"c": "ub"
+},
+{
+"id": "affinity",
+"n": "Affinity",
+"t": "Aggro-Combo",
+"c": "cub"
+},
+{
+"id": "bant",
+"n": "Bant Aggro",
+"t": "Aggro · Midrange",
+"c": "gwu"
+},
+{
+"id": "tron",
+"n": "Green Tron",
+"t": "Rampa · Control",
+"c": "gc"
+},
+{
+"id": "tokens",
+"n": "Tokens",
+"t": "Go-Wide",
+"c": "wb"
+},
+{
+"id": "red-deck-wins",
+"n": "Red Deck Wins",
+"t": "Aggro",
+"c": "r"
+},
+{
+"id": "twin",
+"n": "Twin",
+"t": "Combo",
+"c": "ur"
+},
+{
+"id": "ub-faeries",
+"n": "UB Faeries",
+"t": "Disrupción",
+"c": "ub"
+},
+{
+"id": "valakut",
+"n": "Valakut",
+"t": "Rampa",
+"c": "rg"
+},
+{
+"id": "5-colors-zoo",
+"n": "5 Colors Zoo",
+"t": "Aggro · Midrange",
+"c": "wubrg"
+},
+{
+"id": "grixis-shadow",
+"n": "Grixis Shadow",
+"t": "Control · Midrange",
+"c": "ubr"
+},
+{
+"id": "hatebear",
+"n": "Hatebear",
+"t": "Stax · Control",
+"c": "w"
+},
+{
+"id": "jund",
+"n": "Jund",
+"t": "Midrange",
+"c": "brg"
+},
+{
+"id": "living-end",
+"n": "Living End",
+"t": "Graveyard-Combo",
+"c": "bgu"
+}
+]

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Pantalla · Modern 2015 Invitational</title>
+<link rel="icon" href="img/emblema.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=EB+Garamond:wght@400;500&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+  :root{--tinta:#0A0908;--tinta-2:#14120D;--oro:#C8A44C;--oro-claro:#E8D6A6;--oro-tenue:#8A7340;--pergamino:#E6DCC6;--pergamino-2:#A99C80;--brasa:#B4472A;--linea:rgba(200,164,76,.28);--linea-suave:rgba(200,164,76,.14);
+    --serif:"EB Garamond",Georgia,serif;--display:"Cinzel",Georgia,serif;--util:"Barlow Condensed",Arial,sans-serif}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--tinta);background-image:radial-gradient(ellipse 90% 60% at 50% -10%,rgba(200,164,76,.13),transparent 70%);color:var(--pergamino);font-family:var(--serif);overflow:hidden;cursor:none}
+  body.raton{cursor:default}
+  .capa{display:grid;grid-template-rows:auto 1fr;height:100vh;padding:2vh 3vw;gap:1.5vh}
+  header{display:flex;align-items:center;justify-content:space-between;gap:2vw;border-bottom:1px solid var(--linea);padding-bottom:1.2vh}
+  header .marca{display:flex;align-items:center;gap:1.2vw;font-family:var(--display);font-size:clamp(18px,2.4vw,34px);color:var(--oro);letter-spacing:.12em;text-transform:uppercase}
+  header .marca img{width:clamp(36px,4vw,64px);mix-blend-mode:screen}
+  header .ronda{font-family:var(--display);font-size:clamp(20px,3vw,44px);color:var(--oro-claro);letter-spacing:.1em;text-transform:uppercase;text-align:center}
+  header .reloj{font-family:var(--util);font-weight:700;font-size:clamp(48px,8vw,120px);line-height:1;color:var(--oro-claro);font-variant-numeric:tabular-nums;letter-spacing:.02em;text-align:right;min-width:5.2ch}
+  header .reloj.aviso5{color:#F0C27A}
+  header .reloj.fin{color:#F0A58E;animation:late 1.1s ease-in-out infinite}
+  @keyframes late{50%{opacity:.5}}
+  header .sub{display:block;font-family:var(--util);font-weight:500;font-size:clamp(12px,1.4vw,20px);letter-spacing:.2em;text-transform:uppercase;color:var(--pergamino-2);text-align:right}
+  main{overflow:hidden;min-height:0}
+  .mesas{display:grid;grid-template-columns:repeat(2,1fr);gap:1vh 3vw;align-content:start;list-style:none;margin:0;padding:0}
+  .mesas.tres{grid-template-columns:repeat(3,1fr)}
+  .mesas li{display:grid;grid-template-columns:3.2ch 1fr auto 1fr;gap:0 1.2vw;align-items:center;padding:1vh 0;border-bottom:1px solid var(--linea-suave);font-size:clamp(16px,2.1vw,30px)}
+  .mesas .num{font-family:var(--util);font-weight:600;color:var(--oro-tenue);font-variant-numeric:tabular-nums}
+  .mesas .j{line-height:1.15}
+  .mesas .j.b{text-align:right}
+  .mesas .j .mz{display:block;font-family:var(--util);font-weight:500;font-size:.55em;letter-spacing:.1em;text-transform:uppercase;color:var(--oro-tenue)}
+  .mesas .vs{font-family:var(--util);font-size:.6em;letter-spacing:.14em;color:var(--pergamino-2)}
+  .mesas .vs.res{font-size:.9em;color:var(--oro-claro);font-weight:600}
+  .mesas li.hecha .j{color:var(--pergamino-2)}
+  .mesas li.hecha .j.gana{color:var(--oro-claro)}
+  .mesas li.bye{grid-template-columns:3.2ch 1fr;color:var(--pergamino-2);font-style:italic}
+  .mesas.grandes li{font-size:clamp(22px,3vw,44px);padding:2vh 0}
+  table{width:100%;border-collapse:collapse;font-size:clamp(15px,1.9vw,28px)}
+  th,td{padding:.55vh 1vw;border-bottom:1px solid var(--linea-suave);text-align:left;line-height:1.2}
+  th{font-family:var(--util);font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:.6em;color:var(--oro-tenue)}
+  td.pos{font-family:var(--util);color:var(--oro-claro);width:3ch}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--util)}
+  tr.corte td{border-bottom:2px solid var(--oro-tenue)}
+  .dos{display:grid;grid-template-columns:1fr 1fr;gap:3vw;height:100%}
+  .dos h2{font-family:var(--display);font-size:clamp(16px,1.8vw,26px);color:var(--oro);letter-spacing:.14em;text-transform:uppercase;margin:0 0 1vh;font-weight:600}
+  .centro{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;gap:2vh}
+  .centro h1{font-family:var(--display);font-size:clamp(28px,5vw,80px);color:var(--oro-claro);letter-spacing:.1em;text-transform:uppercase;margin:0;font-weight:700}
+  .centro p{font-size:clamp(18px,2.4vw,36px);color:var(--pergamino-2);margin:0}
+  .inscritos{columns:3;column-gap:3vw;font-size:clamp(16px,2vw,30px);text-align:left;margin:0;padding-left:1.4em;color:var(--pergamino)}
+  .pie{position:fixed;bottom:1vh;left:3vw;right:3vw;display:flex;justify-content:space-between;font-family:var(--util);font-size:clamp(11px,1.1vw,16px);letter-spacing:.2em;text-transform:uppercase;color:var(--oro-tenue)}
+  .pie .off{color:var(--brasa)}
+</style>
+</head>
+<body>
+<div class="capa">
+  <header>
+    <div class="marca"><img src="img/emblema.webp" alt=""><span id="nombre">Modern 2015</span></div>
+    <div class="ronda" id="ronda">—</div>
+    <div><div class="reloj" id="reloj">--:--</div><span class="sub" id="estado"></span></div>
+  </header>
+  <main id="main"></main>
+</div>
+<div class="pie"><span id="pie-izq">tubitas.github.io/modern-2015-invitational</span><span id="pie-der"></span></div>
+<script src="torneo.js"></script>
+<script>
+(function(){
+  var T = window.Torneo, esc = T.esc, $ = function(s){ return document.getElementById(s); };
+  var E = null, MAPA = {}, ultimaV = -1, vista = 0, sinRed = 0;
+  fetch('mazos.json', {cache:'no-store'}).then(function(r){ return r.json(); }).then(function(d){ d.forEach(function(x){ MAPA[x.id] = x.n; }); if (E) pinta(); });
+  function nom(s){ return s ? (MAPA[s] || s) : ''; }
+  function ronda(){ var r = T.rondaActual(E); return r && r.estado !== 'borrador' ? r : (T.rondasCerradas(E).slice(-1)[0] || null); }
+
+  function mesasHtml(r){
+    var n = r.mesas.length;
+    return '<ul class="mesas' + (n > 12 ? ' tres' : '') + '">' + r.mesas.map(function(m){
+      if (!m.b) return '<li class="bye"><span class="num">—</span><span class="j">' + esc(T.nombre(E, m.a)) + ' descansa (bye)</span></li>';
+      var hecha = m.ga != null && m.gb != null, g = hecha ? T.ganador(m) : null;
+      return '<li class="' + (hecha ? 'hecha' : '') + '"><span class="num">' + m.mesa + '</span><span class="j' + (g === m.a ? ' gana' : '') + '">' + esc(T.nombre(E, m.a)) + '<span class="mz">' + esc(nom(m.ma)) + '</span></span><span class="vs' + (hecha ? ' res' : '') + '">' + (hecha ? m.ga + '–' + m.gb : 'vs') + '</span><span class="j b' + (g === m.b ? ' gana' : '') + '">' + esc(T.nombre(E, m.b)) + '<span class="mz">' + esc(nom(m.mb)) + '</span></span></li>';
+    }).join('') + '</ul>';
+  }
+  function clasifHtml(max){
+    var cl = E.terminado ? T.clasificacionFinal(E) : T.clasificacion(E), top = +E.config.top || 0;
+    return '<table><thead><tr><th>#</th><th>Jugador</th><th class="num">Pts</th><th class="num">V-E-D</th><th class="num">Riv.</th><th class="num">Part.</th></tr></thead><tbody>' + cl.slice(0, max || 99).map(function(j){
+      return '<tr' + (top && !E.terminado && j.pos === top ? ' class="corte"' : '') + '><td class="pos">' + j.pos + '</td><td>' + esc(j.nombre) + (j.retirado ? ' <span style="color:var(--brasa);font-size:.7em">ret.</span>' : '') + '</td><td class="num"><b>' + j.pm + '</b></td><td class="num">' + j.v + '-' + j.x + '-' + j.d + '</td><td class="num">' + T.pct(j.omw) + '</td><td class="num">' + T.pct(j.gw) + '</td></tr>';
+    }).join('') + '</tbody></table>';
+  }
+  function pinta(){
+    var r = ronda(), main = $('main');
+    $('nombre').textContent = E.nombre || 'Modern 2015';
+    if (E.terminado) {
+      var cl = T.clasificacionFinal(E);
+      $('ronda').textContent = 'Clasificación final';
+      main.innerHTML = '<div class="dos"><div class="centro"><p>Campeón</p><h1>' + esc(cl[0] ? cl[0].nombre : '—') + '</h1>' + (cl[1] ? '<p>Finalista: ' + esc(cl[1].nombre) + '</p>' : '') + (cl[2] ? '<p>Semifinalistas: ' + esc(cl[2].nombre) + (cl[3] ? ' y ' + esc(cl[3].nombre) : '') + '</p>' : '') + '</div><div>' + clasifHtml(12) + '</div></div>';
+      return;
+    }
+    if (!r) {
+      var js = T.activos(E);
+      $('ronda').textContent = 'Inscripción';
+      main.innerHTML = '<div class="centro"><p>' + js.length + ' de ' + (E.config.plazas || 20) + ' plazas</p><ol class="inscritos">' + js.map(function(j){ return '<li>' + esc(j.nombre) + '</li>'; }).join('') + '</ol></div>';
+      return;
+    }
+    $('ronda').textContent = T.nombreRonda(r) + (r.tipo === 'suiza' ? ' · ' + r.n + ' de ' + E.config.rondas_suizas : '');
+    var cerrada = r.estado === 'cerrada', hayClas = T.suizasCerradas(E) > 0, pocas = r.mesas.length <= 4;
+    // muchas mesas en juego: solo mesas, a 2 o 3 columnas; pocas mesas o ronda cerrada: mesas a una columna + clasificación
+    if (!hayClas || (!cerrada && !pocas)) main.innerHTML = mesasHtml(r);
+    else main.innerHTML = '<div class="dos"><div><h2>' + esc(T.nombreRonda(r)) + (cerrada ? ' · resultados' : '') + '</h2>' + mesasHtml(r).replace('class="mesas tres"', 'class="mesas"').replace('<ul class="mesas">', '<ul class="mesas' + (pocas ? ' grandes' : '') + '" style="grid-template-columns:1fr">') + '</div><div><h2>Clasificación</h2>' + clasifHtml(pocas ? 8 : 14) + '</div></div>';
+  }
+  function tic(){
+    if (!E) return;
+    var r = T.rondaActual(E), el = $('reloj'), es = $('estado');
+    if (!r || r.estado !== 'publicada') { el.className = 'reloj'; if (E.terminado) { el.textContent = ''; es.textContent = ''; } else if (r && r.estado === 'cerrada') { el.textContent = '—'; es.textContent = 'Ronda cerrada'; } else { el.textContent = T.activos(E).length + '/' + (E.config.plazas || 20); es.textContent = 'inscritos'; } return; }
+    var ms = T.restante(r), est = T.estadoTemporizador(r);
+    if (ms == null) { el.textContent = T.fmt(r.temporizador.duracion_min * 60000); el.className = 'reloj'; es.textContent = 'Sin empezar'; return; }
+    el.textContent = T.fmt(ms); el.className = 'reloj' + (ms <= 0 ? ' fin' : ms <= 5 * 60000 ? ' aviso5' : '');
+    es.textContent = est === 'pausado' ? 'En pausa' : ms <= 0 ? 'Tiempo · turno en curso y cinco más' : 'En juego';
+  }
+  function carga(){
+    T.leer().then(function(d){ sinRed = 0; $('pie-der').textContent = ''; $('pie-der').className = ''; if (!d || !d.estado) return; E = d.estado; if (d.version !== ultimaV) { ultimaV = d.version; pinta(); } tic(); })
+      .catch(function(){ if (++sinRed > 3) { $('pie-der').textContent = 'sin conexión'; $('pie-der').className = 'off'; } });
+  }
+  carga(); setInterval(carga, 3000); setInterval(tic, 250);
+  // pantalla encendida y sin cursor
+  if (navigator.wakeLock) { var pide = function(){ if (document.visibilityState === 'visible') navigator.wakeLock.request('screen').catch(function(){}); }; pide(); document.addEventListener('visibilitychange', pide); }
+  var tRaton; document.addEventListener('mousemove', function(){ document.body.classList.add('raton'); clearTimeout(tRaton); tRaton = setTimeout(function(){ document.body.classList.remove('raton'); }, 2500); });
+  document.addEventListener('dblclick', function(){ if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen().catch(function(){}); });
+})();
+</script>
+</body>
+</html>
