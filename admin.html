@@ -216,7 +216,8 @@
   var K = null, E = null, V = 0, MAZOS = [], MAPA = {}, pila = [], guardando = false, vista = 'jugadores', swap = null, pantallaBloq = null;
 
   /* ---------- clave ---------- */
-  var m = location.hash.match(/k=([^&]+)/);
+  var m = location.hash.match(/k=([^&]+)/), mv = location.hash.match(/v=(jugadores|ronda|clasif|mas)/);
+  if (mv) vista = mv[1]; // #v=ronda abre esa pestaña (enlaces del manual)
   if (m) { K = decodeURIComponent(m[1]); try { localStorage.setItem('torneo_k', K); } catch(e){} history.replaceState(null, '', location.pathname); }
   else { try { K = localStorage.getItem('torneo_k'); } catch(e){} }
 
