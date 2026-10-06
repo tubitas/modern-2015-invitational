@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Liga PreModern Almería</title>
+<meta name="description" content="Liga de Magic PreModern en Almería. Temporada 2026/27: calendario de jornadas, clasificación, resultados, mazos e histórico.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Almendra+SC&family=Alegreya:ital@1&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: héroe con escena pintada (Alcazaba al anochecer, brasas) + tablón de liga en paneles de cuero con remaches + un manuscrito en pergamino. Un solo mundo oscuro. */
+:root{
+  --carbon:#0e0c0a; --carbon-2:#16120e; --cuero:#2a1f16; --cuero-2:#1d1610;
+  --bronce:#9a7244; --bronce-bajo:#5e4529; --oro:#c9a55c; --oro-claro:#ead39a;
+  --marfil:#ebe2cc; --marfil-2:#b5a88f; --sangre:#8e2b1f;
+  --perg:#ddcda8; --perg-2:#c4ae80; --tinta:#2a1c11;
+  --f-titulo:"Almendra",Georgia,"Times New Roman",serif;
+  --f-sc:"Almendra SC","Almendra",Georgia,serif;
+  --f-cita:"Alegreya",Georgia,serif;
+  --f-texto:"Alegreya Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--carbon);color:var(--marfil);font:400 17px/1.55 var(--f-texto);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+h1,h2,h3{text-wrap:balance;font-weight:400;margin:0}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.envoltura{width:100%;max-width:1180px;margin-inline:auto;padding-inline:max(16px,4vw)}
+
+/* aviso de maqueta */
+.aviso{background:var(--sangre);color:var(--marfil);text-align:center;font:500 13px/1.3 var(--f-texto);letter-spacing:.06em;padding:7px 16px}
+
+/* cabecera */
+.cab{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(14,12,10,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--bronce-bajo)}
+.cab .envoltura{display:flex;align-items:center;gap:20px;min-height:64px}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.sello{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:700 15px/1 var(--f-titulo);color:var(--carbon);background:radial-gradient(circle at 35% 30%,var(--oro-claro),var(--oro) 45%,var(--bronce) 100%);box-shadow:0 0 0 2px var(--carbon),0 0 0 3px var(--bronce)}
+.marca b{font:400 19px/1 var(--f-titulo);letter-spacing:.01em}
+.marca small{display:block;font:500 11px/1 var(--f-texto);letter-spacing:.18em;text-transform:uppercase;color:var(--marfil-2);margin-top:4px}
+.nav{display:flex;gap:2px;margin-left:auto;align-items:center}
+.nav a{text-decoration:none;font:500 13px/1 var(--f-texto);letter-spacing:.14em;text-transform:uppercase;color:var(--marfil-2);padding:10px 9px;border-radius:2px}
+.nav a:hover,.nav a[aria-current]{color:var(--oro-claro)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font:700 13px/1 var(--f-texto);letter-spacing:.16em;text-transform:uppercase;padding:14px 22px;border-radius:2px;cursor:pointer;border:1px solid transparent;transition:background .2s,color .2s,border-color .2s}
+.btn-oro{background:linear-gradient(180deg,var(--oro-claro),var(--oro) 55%,var(--bronce));color:var(--carbon);border-color:var(--bronce);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-oro:hover{background:var(--oro-claro)}
+.btn-fantasma{color:var(--oro-claro);border-color:var(--bronce)}
+.btn-fantasma:hover{background:rgba(201,165,92,.1);border-color:var(--oro)}
+.cab .btn{padding:11px 16px;font-size:12px;margin-left:10px}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--bronce-bajo);color:var(--marfil);font:500 12px/1 var(--f-texto);letter-spacing:.16em;text-transform:uppercase;padding:11px 14px;border-radius:2px;cursor:pointer}
+@media (max-width:1060px){
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;background:var(--carbon-2);border-bottom:1px solid var(--bronce-bajo);padding:8px max(16px,4vw) 18px}
+  .nav.abierto{display:flex}
+  .nav a{padding:14px 4px;border-bottom:1px solid rgba(94,69,41,.4)}
+  .cab .btn{margin:12px 0 0}
+  .menu-btn{display:block}
+}
+
+/* héroe */
+.heroe{position:relative;overflow:hidden;min-height:min(86vh,780px);display:flex;align-items:flex-end;isolation:isolate}
+#escena{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.heroe::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,12,10,.86) 0%,rgba(14,12,10,.55) 42%,rgba(14,12,10,0) 70%),linear-gradient(0deg,var(--carbon) 0%,rgba(14,12,10,0) 30%)}
+.heroe::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.22;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.heroe-txt{padding-block:120px 56px;max-width:720px}
+.placa{display:inline-block;font:400 15px/1 var(--f-sc);letter-spacing:.2em;color:var(--oro-claro);padding:9px 16px 8px;border:1px solid var(--bronce);background:linear-gradient(180deg,rgba(154,114,68,.25),rgba(94,69,41,.15));box-shadow:inset 0 0 0 3px rgba(14,12,10,.6),inset 0 0 0 4px rgba(154,114,68,.45)}
+.heroe h1{font:400 clamp(46px,8.4vw,104px)/.92 var(--f-titulo);letter-spacing:-.015em;margin-top:26px;text-shadow:0 2px 30px rgba(0,0,0,.6)}
+.heroe h1 span{display:block;color:var(--oro);background:linear-gradient(180deg,var(--oro-claro) 10%,var(--oro) 55%,var(--bronce) 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lema{font:400 clamp(20px,2.6vw,30px)/1.2 var(--f-sc);letter-spacing:.08em;margin-top:18px;color:var(--marfil)}
+.lema em{font:italic 400 1.12em/1 var(--f-cita);letter-spacing:0;color:var(--oro-claro)}
+.heroe p{color:var(--marfil-2);font-size:18px;max-width:52ch;margin:18px 0 0}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.prueba{border-top:1px solid var(--bronce-bajo);border-bottom:1px solid var(--bronce-bajo);background:var(--carbon-2)}
+.prueba ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr)}
+.prueba li{padding:22px 18px;border-left:1px solid rgba(94,69,41,.5);min-width:0}
+.prueba li:first-child{border-left:0;padding-left:0}
+.prueba b{display:block;font:400 30px/1 var(--f-titulo);color:var(--oro)}
+.prueba span{display:block;font:500 12px/1.3 var(--f-texto);letter-spacing:.16em;text-transform:uppercase;color:var(--marfil-2);margin-top:8px}
+@media (max-width:760px){.prueba ul{grid-template-columns:1fr 1fr}.prueba li:nth-child(3){border-left:0;padding-left:0}.prueba li:nth-child(n+3){border-top:1px solid rgba(94,69,41,.5)}}
+
+/* entrada del héroe */
+@media (prefers-reduced-motion:no-preference){
+  .heroe-txt>*{animation:sube .9s cubic-bezier(.2,.7,.2,1) both}
+  .heroe-txt>:nth-child(2){animation-delay:.08s}.heroe-txt>:nth-child(3){animation-delay:.18s}
+  .heroe-txt>:nth-child(4){animation-delay:.28s}.heroe-txt>:nth-child(5){animation-delay:.36s}
+  @keyframes sube{from{opacity:.001;transform:translateY(18px)}to{opacity:1;transform:none}}
+}
+
+/* secciones */
+.seccion{padding-block:96px 0}
+.runas{display:flex;align-items:center;gap:16px;color:var(--bronce);font:400 16px/1 var(--f-texto);letter-spacing:.5em;margin-bottom:22px}
+.runas::before,.runas::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--bronce-bajo),transparent)}
+.titulo-sec{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.titulo-sec h2{font:400 clamp(30px,4vw,44px)/1.05 var(--f-titulo)}
+.titulo-sec a{font:500 13px/1 var(--f-texto);letter-spacing:.14em;text-transform:uppercase;color:var(--oro);text-decoration:none;border-bottom:1px solid var(--bronce-bajo);padding-bottom:4px}
+.titulo-sec a:hover{color:var(--oro-claro);border-color:var(--oro)}
+.ej{display:inline-block;vertical-align:middle;font:700 10px/1 var(--f-texto);letter-spacing:.16em;text-transform:uppercase;color:var(--marfil-2);border:1px dashed var(--bronce-bajo);padding:4px 7px;margin-left:10px;border-radius:2px}
+
+/* paneles de cuero con remaches */
+.panel{position:relative;background:
+  radial-gradient(circle at 12px 12px,var(--bronce) 0 2px,rgba(0,0,0,.6) 3px,transparent 4px),
+  radial-gradient(circle at calc(100% - 12px) 12px,var(--bronce) 0 2px,rgba(0,0,0,.6) 3px,transparent 4px),
+  radial-gradient(circle at 12px calc(100% - 12px),var(--bronce) 0 2px,rgba(0,0,0,.6) 3px,transparent 4px),
+  radial-gradient(circle at calc(100% - 12px) calc(100% - 12px),var(--bronce) 0 2px,rgba(0,0,0,.6) 3px,transparent 4px),
+  radial-gradient(120% 90% at 30% 0%,#33261b 0%,var(--cuero) 45%,var(--cuero-2) 100%);
+  border:1px solid var(--bronce-bajo);box-shadow:inset 0 0 0 6px rgba(14,12,10,.35),inset 0 0 0 7px rgba(154,114,68,.28),0 20px 50px rgba(0,0,0,.45);padding:34px;min-width:0}
+.panel h3{font:400 15px/1 var(--f-sc);letter-spacing:.2em;color:var(--oro);margin-bottom:22px}
+
+/* próxima jornada */
+.proxima{display:grid;grid-template-columns:auto 1fr auto;gap:36px;align-items:center}
+.medallon{width:132px;height:132px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 38% 30%,#4a3826,#251a11 70%);box-shadow:0 0 0 2px var(--carbon),0 0 0 4px var(--bronce),0 0 0 9px rgba(14,12,10,.7),0 0 0 10px var(--bronce-bajo),0 0 40px rgba(201,165,92,.15)}
+.medallon b{display:block;font:400 54px/1 var(--f-titulo);color:var(--oro-claro)}
+.medallon span{display:block;font:500 10px/1 var(--f-texto);letter-spacing:.24em;text-transform:uppercase;color:var(--marfil-2);margin-top:4px}
+.fecha-grande{font:400 clamp(30px,3.6vw,44px)/1.05 var(--f-titulo)}
+.fecha-grande small{display:block;font:500 14px/1 var(--f-texto);letter-spacing:.16em;text-transform:uppercase;color:var(--oro);margin-top:12px}
+.datos{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;margin:20px 0 0;font-size:16px}
+.datos dt{font:500 12px/1.9 var(--f-texto);letter-spacing:.16em;text-transform:uppercase;color:var(--marfil-2)}
+.datos dd{margin:0;min-width:0}
+.plazas{min-width:220px}
+.plazas .cifra{font:400 46px/1 var(--f-titulo);color:var(--oro-claro)}
+.plazas .cifra small{font-size:22px;color:var(--marfil-2)}
+.barra{height:8px;background:rgba(14,12,10,.7);border:1px solid var(--bronce-bajo);margin:12px 0 10px;overflow:hidden}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--bronce),var(--oro-claro))}
+.estado{display:inline-flex;align-items:center;gap:8px;font:700 12px/1 var(--f-texto);letter-spacing:.16em;text-transform:uppercase;color:var(--oro-claro)}
+.estado::before{content:"";width:8px;height:8px;border-radius:50%;background:#e9b45a;box-shadow:0 0 10px #e9b45a}
+.plazas .btn{margin-top:20px;width:100%}
+.faltan{color:var(--marfil-2);font-size:15px;margin-top:6px}
+@media (max-width:900px){.proxima{grid-template-columns:auto 1fr}.plazas{grid-column:1/-1;min-width:0}}
+@media (max-width:560px){.proxima{grid-template-columns:1fr;gap:24px}.medallon{width:104px;height:104px}.medallon b{font-size:42px}.panel{padding:26px 20px}}
+
+/* clasificación + resultados */
+.par{display:grid;grid-template-columns:7fr 5fr;gap:28px;margin-top:28px;align-items:start}
+@media (max-width:900px){.par{grid-template-columns:1fr}}
+.tabla{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:16px}
+.tabla th{font:500 11px/1 var(--f-texto);letter-spacing:.18em;text-transform:uppercase;color:var(--marfil-2);text-align:left;padding:0 10px 6px}
+.tabla th.d,.tabla td.d{text-align:right}
+.tabla td{padding:12px 10px;background:rgba(14,12,10,.45);border-top:1px solid rgba(94,69,41,.45);border-bottom:1px solid rgba(94,69,41,.45)}
+.tabla td:first-child{border-left:1px solid rgba(94,69,41,.45);width:52px;text-align:center;font:400 22px/1 var(--f-titulo);color:var(--marfil-2)}
+.tabla td:last-child{border-right:1px solid rgba(94,69,41,.45);font:700 20px/1 var(--f-texto);color:var(--oro-claro)}
+.tabla .jug{font-weight:500}
+.tabla .arq{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--marfil-2);margin-top:3px}
+.tabla tr.lider td{background:linear-gradient(90deg,rgba(201,165,92,.22),rgba(201,165,92,.06));border-color:var(--oro)}
+.tabla tr.lider td:first-child{color:var(--carbon)}
+.tabla tr.lider td:first-child span{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--oro-claro),var(--oro) 50%,var(--bronce));box-shadow:0 0 0 2px var(--carbon),0 0 0 3px var(--oro),0 0 18px rgba(234,211,154,.35)}
+.tabla tr.lider .jug{font:400 21px/1.1 var(--f-titulo);color:var(--oro-claro)}
+.tabla .sec{color:var(--marfil-2)}
+@media (max-width:520px){.tabla .col-j{display:none}.tabla td{padding:11px 8px}}
+.pip{width:9px;height:9px;border-radius:50%;display:inline-block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
+.pW{background:#e6dcc0}.pU{background:#4b78a0}.pB{background:#2b2522;box-shadow:inset 0 0 0 1px #8a7a66}.pR{background:#b04a30}.pG{background:#5b7a40}
+.panel .pie{margin-top:22px}
+
+.libro{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.libro li{padding:18px 0;border-top:1px solid rgba(94,69,41,.5)}
+.libro li:first-child{border-top:0;padding-top:0}
+.libro .cab-j{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.libro .cab-j b{font:400 22px/1.1 var(--f-titulo)}
+.libro .fin{font:700 10px/1 var(--f-texto);letter-spacing:.18em;text-transform:uppercase;color:var(--marfil-2);border:1px solid var(--bronce-bajo);padding:5px 7px;white-space:nowrap}
+.libro .meta{font-size:14px;color:var(--marfil-2);margin-top:4px}
+.libro .gano{margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.libro .gano strong{color:var(--oro-claro);font-weight:500}
+
+/* manuscrito */
+.manuscrito{position:relative;color:var(--tinta);padding:clamp(28px,5vw,64px);background:
+  radial-gradient(ellipse at 20% 10%,rgba(255,250,230,.55),transparent 55%),
+  radial-gradient(ellipse at 85% 90%,rgba(120,80,30,.28),transparent 60%),
+  linear-gradient(180deg,var(--perg),var(--perg-2));
+  box-shadow:inset 0 0 70px rgba(80,45,15,.55),inset 0 0 12px rgba(60,30,10,.5),0 30px 60px rgba(0,0,0,.5);border-radius:3px}
+.manuscrito::before{content:"";position:absolute;inset:14px;border:1px solid rgba(94,60,25,.45);pointer-events:none}
+.manuscrito-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(28px,5vw,64px)}
+@media (max-width:860px){.manuscrito-grid{grid-template-columns:1fr}}
+.manuscrito h2{font:400 clamp(32px,4.4vw,50px)/1 var(--f-titulo);color:var(--tinta)}
+.manuscrito .sub{font:400 15px/1 var(--f-sc);letter-spacing:.18em;color:var(--sangre);margin-top:12px}
+.manuscrito p{font:400 18px/1.62 var(--f-cita);font-style:normal;max-width:60ch}
+.manuscrito .capitular::first-letter{float:left;font:400 76px/.8 var(--f-titulo);color:var(--sangre);padding:8px 10px 0 0}
+.manuscrito h3{font:400 14px/1 var(--f-sc);letter-spacing:.2em;color:var(--sangre);margin:0 0 14px}
+.lista-ms{list-style:none;margin:0 0 28px;padding:0}
+.lista-ms li{padding:9px 0 9px 26px;border-bottom:1px dotted rgba(94,60,25,.45);position:relative;font-size:16px}
+.lista-ms li::before{content:"ᛟ";position:absolute;left:0;top:9px;color:var(--sangre);font-size:14px}
+.arquetipos{display:flex;flex-wrap:wrap;gap:8px}
+.arquetipos span{display:inline-flex;align-items:center;gap:6px;font:500 14px/1 var(--f-texto);padding:8px 11px;border:1px solid rgba(94,60,25,.5);background:rgba(255,248,225,.35);border-radius:2px}
+.manuscrito .fl{font:italic 400 17px/1.5 var(--f-cita);color:#5a4128;margin-top:26px;padding-top:18px;border-top:1px solid rgba(94,60,25,.4)}
+.manuscrito a.sigue{color:var(--sangre);font-weight:700;text-decoration:none;border-bottom:1px solid currentColor}
+
+/* histórico */
+.historico{display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;padding-block:36px;border-top:1px solid var(--bronce-bajo);border-bottom:1px solid var(--bronce-bajo)}
+.historico .medallon{width:96px;height:96px}
+.historico .medallon b{font-size:15px;letter-spacing:.06em}
+.historico h2{font:400 clamp(26px,3vw,36px)/1.1 var(--f-titulo)}
+.historico p{margin:8px 0 0;color:var(--marfil-2);max-width:56ch}
+@media (max-width:760px){.historico{grid-template-columns:1fr;gap:18px}}
+
+/* pie */
+.pie-web{margin-top:96px;padding-block:44px 54px;background:var(--carbon-2);border-top:1px solid var(--bronce-bajo);font-size:14px;color:var(--marfil-2)}
+.pie-web .envoltura{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:28px}
+.pie-web b{display:block;font:400 20px/1.2 var(--f-titulo);color:var(--marfil);margin-bottom:8px}
+.pie-web h4{font:500 11px/1 var(--f-texto);letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin:0 0 12px}
+.pie-web p{margin:0 0 6px}
+.pie-web .legal{grid-column:1/-1;border-top:1px solid rgba(94,69,41,.5);padding-top:20px;font-size:12px;opacity:.8}
+@media (max-width:760px){.pie-web .envoltura{grid-template-columns:1fr}}
+
+.aviso-sec{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--cuero);border:1px solid var(--bronce);color:var(--marfil);padding:12px 18px;font-size:15px;z-index:40;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:calc(100% - 32px)}
+</style>
+</head>
+<body>
+
+<div class="aviso">Maqueta de la portada · los nombres, fechas y puntos son de ejemplo</div>
+
+<header class="cab">
+  <div class="envoltura">
+    <a class="marca" href="#inicio" aria-label="Liga PreModern Almería, inicio">
+      <span class="sello">PL</span>
+      <span><b>PreModern League</b><small>Almería</small></span>
+    </a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menú</button>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#inicio" aria-current="page">Inicio</a>
+      <a href="#liga">Liga</a>
+      <a href="#clasificacion">Clasificación</a>
+      <a href="#" data-pronto>Jornadas</a>
+      <a href="#" data-pronto>Jugadores</a>
+      <a href="#" data-pronto>Mazos</a>
+      <a href="#" data-pronto>Reglamento</a>
+      <a href="#historico">Histórico</a>
+      <a class="btn btn-oro" href="#" data-pronto>Inscripciones</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="heroe" aria-label="Portada">
+    <canvas id="escena" aria-hidden="true"></canvas>
+    <div class="envoltura">
+      <div class="heroe-txt">
+        <span class="placa">Temporada 2026/27</span>
+        <h1>PreModern League <span>Almería</span></h1>
+        <div class="lema">The Old School <em>Battlefield</em></div>
+        <p>Magic con las cartas de 1995 a 2003, de Cuarta Edición a Scourge. Jornadas en Almería, una clasificación que se suma toda la temporada y un campeón que entra en el histórico.</p>
+        <div class="ctas">
+          <a class="btn btn-oro" href="#clasificacion">Ver clasificación</a>
+          <a class="btn btn-fantasma" href="#proxima">Próxima jornada</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="prueba">
+    <ul class="envoltura">
+      <li><b class="num">1995–2003</b><span>Cartas legales</span></li>
+      <li><b class="num">60 + 15</b><span>Mazo y banquillo</span></li>
+      <li><b>Bo3</b><span>Al mejor de tres</span></li>
+      <li><b class="num">2026/27</b><span>Primera temporada</span></li>
+    </ul>
+  </div>
+
+  <section class="seccion envoltura" id="proxima" aria-labelledby="t-proxima">
+    <div class="runas" aria-hidden="true">ᚠ ᛟ ᚱ</div>
+    <div class="titulo-sec">
+      <h2 id="t-proxima">Próxima jornada <span class="ej">Ejemplo</span></h2>
+      <a href="#" data-pronto>Calendario completo</a>
+    </div>
+    <div class="panel proxima">
+      <div class="medallon"><div><b>III</b><span>Jornada</span></div></div>
+      <div>
+        <div class="fecha-grande">Sábado 14 de noviembre<small>17:00 h · Inscripción desde las 16:30</small></div>
+        <dl class="datos">
+          <dt>Lugar</dt><dd>Cartinha Brilhante · Av. Federico García Lorca 165, Almería</dd>
+          <dt>Formato</dt><dd>4 rondas suizas al mejor de tres</dd>
+          <dt>Precio</dt><dd>10 €</dd>
+        </dl>
+      </div>
+      <div class="plazas">
+        <span class="estado">Inscripciones abiertas</span>
+        <div class="cifra num" style="margin-top:14px">14 <small>/ 24 jugadores</small></div>
+        <div class="barra" role="img" aria-label="14 de 24 plazas ocupadas"><i style="width:58.3%"></i></div>
+        <div class="faltan num" id="faltan">Quedan 10 plazas</div>
+        <a class="btn btn-fantasma" href="#" data-pronto>Inscribirme</a>
+      </div>
+    </div>
+
+    <div class="par">
+      <div class="panel" id="clasificacion">
+        <div class="titulo-sec" style="margin-bottom:12px">
+          <h3 style="margin:0">Clasificación general <span class="ej">Ejemplo</span></h3>
+        </div>
+        <table class="tabla num">
+          <thead><tr><th>Pos.</th><th>Jugador</th><th class="d col-j">Jorn.</th><th class="d col-j">V–D</th><th class="d">Pts</th></tr></thead>
+          <tbody>
+            <tr class="lider"><td><span>1</span></td><td><div class="jug">Rafa Céspedes</div><div class="arq"><i class="pip pR"></i> Goblins</div></td><td class="d col-j sec">2</td><td class="d col-j sec">7–1</td><td class="d">21</td></tr>
+            <tr><td>2</td><td><div class="jug">Lucía Ortega</div><div class="arq"><i class="pip pW"></i><i class="pip pU"></i> Landstill</div></td><td class="d col-j sec">2</td><td class="d col-j sec">6–2</td><td class="d">18</td></tr>
+            <tr><td>3</td><td><div class="jug">Paco Membrives</div><div class="arq"><i class="pip pB"></i><i class="pip pG"></i> Rock</div></td><td class="d col-j sec">2</td><td class="d col-j sec">6–2</td><td class="d">18</td></tr>
+            <tr><td>4</td><td><div class="jug">Nacho Úbeda</div><div class="arq"><i class="pip pU"></i><i class="pip pB"></i> Reanimator</div></td><td class="d col-j sec">2</td><td class="d col-j sec">5–3</td><td class="d">15</td></tr>
+            <tr><td>5</td><td><div class="jug">Marta Sola</div><div class="arq"><i class="pip pG"></i> Elves</div></td><td class="d col-j sec">2</td><td class="d col-j sec">5–3</td><td class="d">15</td></tr>
+          </tbody>
+        </table>
+        <div class="pie"><a class="btn btn-oro" href="#" data-pronto>Ver clasificación completa</a></div>
+      </div>
+
+      <div class="panel">
+        <h3>Últimos resultados <span class="ej">Ejemplo</span></h3>
+        <ul class="libro">
+          <li>
+            <div class="cab-j"><b>Jornada II</b><span class="fin">Finalizada</span></div>
+            <div class="meta num">Sábado 17 de octubre · 16 jugadores</div>
+            <div class="gano">Ganó <strong>Lucía Ortega</strong> con <i class="pip pW"></i><i class="pip pU"></i> Landstill, 4–0</div>
+          </li>
+          <li>
+            <div class="cab-j"><b>Jornada I</b><span class="fin">Finalizada</span></div>
+            <div class="meta num">Sábado 26 de septiembre · 12 jugadores</div>
+            <div class="gano">Ganó <strong>Rafa Céspedes</strong> con <i class="pip pR"></i> Goblins, 4–0</div>
+          </li>
+        </ul>
+        <div class="pie"><a class="btn btn-fantasma" href="#" data-pronto>Todas las jornadas</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion envoltura" id="liga" aria-labelledby="t-liga">
+    <div class="runas" aria-hidden="true">ᛉ ᛟ ᛉ</div>
+    <div class="manuscrito">
+      <div class="manuscrito-grid">
+        <div>
+          <h2 id="t-liga">La Liga</h2>
+          <div class="sub">Texto de ejemplo, a falta del de Jomy</div>
+          <p class="capitular" style="margin-top:26px">PreModern se juega con las cartas que salieron entre Cuarta Edición, en 1995, y Scourge, en 2003. Es el Magic de los marcos antiguos, de Stasis, Goblins y Reanimator, el que muchos aprendimos en la mesa de una tienda.</p>
+          <p>Cada jornada es un torneo completo. Los puntos de todas se suman en una clasificación general y, al final de la temporada, el primero se lleva el título y su nombre queda en el histórico de la liga.</p>
+          <p class="fl">Aquí cuentan las partidas jugadas, la gente que vuelve cada mes y los mazos que se quedan en el recuerdo.</p>
+          <p style="margin-top:18px"><a class="sigue" href="#" data-pronto>Leer el reglamento</a></p>
+        </div>
+        <div>
+          <h3>Formato</h3>
+          <ul class="lista-ms">
+            <li>Cartas de Cuarta Edición a Scourge</li>
+            <li>Mazo de 60 cartas y banquillo de 15</li>
+            <li>Rondas suizas al mejor de tres</li>
+            <li>Puntos por jornada, sumados toda la temporada</li>
+          </ul>
+          <h3>Arquetipos del formato</h3>
+          <div class="arquetipos">
+            <span><i class="pip pU"></i><i class="pip pW"></i>Stasis</span>
+            <span><i class="pip pW"></i><i class="pip pU"></i>Landstill</span>
+            <span><i class="pip pR"></i>Goblins</span>
+            <span><i class="pip pG"></i>Elves</span>
+            <span><i class="pip pU"></i><i class="pip pB"></i>Reanimator</span>
+            <span><i class="pip pG"></i>Survival</span>
+            <span><i class="pip pB"></i><i class="pip pG"></i>Rock</span>
+            <span><i class="pip pU"></i><i class="pip pW"></i>Counterbalance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion envoltura" id="historico" aria-labelledby="t-hist">
+    <div class="historico">
+      <div class="medallon"><div><b>2026/27</b><span>Temporada</span></div></div>
+      <div>
+        <h2 id="t-hist">El primer nombre del histórico se escribe esta temporada</h2>
+        <p>Cada campeón queda registrado con su mazo, sus jornadas y su camino. Con los años, esta página será el archivo de la liga.</p>
+      </div>
+      <a class="btn btn-fantasma" href="#" data-pronto>Ver histórico</a>
+    </div>
+  </section>
+</main>
+
+<footer class="pie-web">
+  <div class="envoltura">
+    <div>
+      <b>PreModern League Almería</b>
+      <p>Organiza Jomy Tournaments.</p>
+    </div>
+    <div>
+      <h4>La liga</h4>
+      <p>Calendario y jornadas</p>
+      <p>Reglamento y Banned &amp; Restricted</p>
+      <p>Premios</p>
+    </div>
+    <div>
+      <h4>Software y web</h4>
+      <p>hiperocio.com</p>
+      <p>geovisibilidad.com</p>
+    </div>
+    <p class="legal">Magic: The Gathering es una marca de Wizards of the Coast. Liga independiente, sin relación con Wizards of the Coast.</p>
+  </div>
+</footer>
+
+<div class="aviso-sec" id="aviso-sec" role="status" hidden>Esta sección se monta en la siguiente fase.</div>
+
+<script>
+(function(){
+  // menú en móvil
+  var btn=document.getElementById('menu-btn'),nav=document.getElementById('nav');
+  btn.addEventListener('click',function(){var a=nav.classList.toggle('abierto');btn.setAttribute('aria-expanded',a)});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A'&&!e.target.hasAttribute('data-pronto')){nav.classList.remove('abierto');btn.setAttribute('aria-expanded','false')}});
+  // enlaces de secciones que aún no existen
+  var aviso=document.getElementById('aviso-sec'),t;
+  document.addEventListener('click',function(e){var a=e.target.closest('[data-pronto]');if(!a)return;e.preventDefault();aviso.hidden=false;clearTimeout(t);t=setTimeout(function(){aviso.hidden=true},2200)});
+  // días que faltan para la jornada (fecha de ejemplo)
+  var dias=Math.ceil((new Date('2026-11-14T17:00:00+01:00')-new Date())/864e5);
+  if(dias>0)document.getElementById('faltan').textContent='Quedan 10 plazas · faltan '+dias+(dias===1?' día':' días');
+
+  // escena del héroe: la Alcazaba al anochecer, pitas en primer plano, humo y brasas
+  var cv=document.getElementById('escena'),ctx=cv.getContext('2d');
+  var W,H,D,fondo,brasas=[],humo=[],vivo=true,quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function azar(s){return function(){s=(s*16807)%2147483647;return(s-1)/2147483646}}
+  function cresta(r,base,amp,f,colina){
+    var p=[],a=r()*6,b=r()*6,c=r()*6;
+    for(var x=0;x<=W+8;x+=4){var t=x/W,y=base-amp*(.55*Math.sin(t*f+a)+.3*Math.sin(t*f*2.3+b)+.15*Math.sin(t*f*5.1+c))-(r()-.5)*amp*.04;
+      if(colina)y-=colina.h*Math.exp(-Math.pow((t-colina.x)/colina.w,2));p.push(y)}
+    return p}
+  function yEn(p,x){var i=Math.max(0,Math.min(p.length-2,Math.floor(x/4))),f=x/4-i;return p[i]*(1-f)+p[i+1]*f}
+  function rellena(g,p,col){g.beginPath();g.moveTo(0,H);for(var i=0;i<p.length;i++)g.lineTo(i*4,p[i]);g.lineTo(W,H);g.closePath();g.fillStyle=col;g.fill()}
+  function muralla(g,p,x0,x1,alto,almena,col){
+    g.beginPath();g.moveTo(x0,yEn(p,x0)+3);var paso=Math.max(4,almena*1.4);
+    for(var x=x0;x<x1;x+=paso){var y=yEn(p,x)-alto-((Math.round((x-x0)/paso)%2)?almena:0);g.lineTo(x,y);g.lineTo(Math.min(x+paso,x1),y)}
+    for(x=x1;x>=x0;x-=4)g.lineTo(x,yEn(p,x)+3);g.closePath();g.fillStyle=col;g.fill()}
+  function torre(g,p,cx,ancho,alto,almena,col){
+    var base=Math.max(yEn(p,cx-ancho/2),yEn(p,cx+ancho/2))+3,top=Math.min(yEn(p,cx-ancho/2),yEn(p,cx+ancho/2))-alto,n=4,w=ancho/(n*2-1);
+    g.beginPath();g.moveTo(cx-ancho/2,base);g.lineTo(cx-ancho/2,top);
+    for(var i=0;i<n*2-1;i++){var x=cx-ancho/2+i*w;g.lineTo(x,i%2?top+almena:top);g.lineTo(x+w,i%2?top+almena:top)}
+    g.lineTo(cx+ancho/2,base);g.closePath();g.fillStyle=col;g.fill();return top}
+  function pita(g,x,y,s,col){
+    g.fillStyle=col;
+    for(var i=0;i<13;i++){var ang=Math.PI*(-.97+i*(.94/12)),l=s*(.55+.45*Math.sin(i/12*Math.PI)),bx=Math.cos(ang),by=Math.sin(ang),nx=-by,ny=bx,ww=s*.07;
+      g.beginPath();g.moveTo(x+nx*ww,y+ny*ww);g.quadraticCurveTo(x+bx*l*.55+nx*ww*.8,y+by*l*.55+ny*ww*.8,x+bx*l,y+by*l*1.02);
+      g.quadraticCurveTo(x+bx*l*.55-nx*ww*.8,y+by*l*.55-ny*ww*.8,x-nx*ww,y-ny*ww);g.closePath();g.fill()}
+    var alto=s*3.1;g.strokeStyle=col;g.lineCap='round';g.lineWidth=Math.max(2,s*.045);
+    g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+s*.08,y-alto*.5,x+s*.02,y-alto);g.stroke();
+    g.lineWidth=Math.max(1.2,s*.022);
+    for(var k=0;k<6;k++){var yy=y-alto*(.62+k*.065),lado=k%2?1:-1,len=s*(.34-k*.035);
+      g.beginPath();g.moveTo(x+s*.04,yy);g.quadraticCurveTo(x+lado*len*.6,yy-s*.02,x+lado*len,yy-s*.1);g.stroke();
+      g.beginPath();g.arc(x+lado*len,yy-s*.12,s*.05,0,7);g.fill()}}
+  function pinta(){
+    D=Math.min(devicePixelRatio||1,2);var caja=cv.parentNode.getBoundingClientRect(),cw=caja.width||innerWidth,ch=caja.height||innerHeight*.86;
+    if(!cw||!ch){setTimeout(pinta,120);return}
+    W=Math.round(cw*D);H=Math.round(ch*D);cv.width=W;cv.height=H;
+    fondo=document.createElement('canvas');fondo.width=W;fondo.height=H;var g=fondo.getContext('2d'),R=azar(1923),m=Math.min(W,H),ancho=W>H;
+    var cielo=g.createLinearGradient(0,0,0,H);cielo.addColorStop(0,'#0a090b');cielo.addColorStop(.35,'#1a120f');cielo.addColorStop(.62,'#4e2014');cielo.addColorStop(.72,'#6a2a16');cielo.addColorStop(1,'#1c0d08');
+    g.fillStyle=cielo;g.fillRect(0,0,W,H);
+    var cx=ancho?W*.72:W*.6,brillo=g.createRadialGradient(cx,H*.66,0,cx,H*.66,Math.max(W,H)*.6);brillo.addColorStop(0,'rgba(232,140,70,.42)');brillo.addColorStop(.35,'rgba(160,70,35,.18)');brillo.addColorStop(1,'rgba(0,0,0,0)');
+    g.fillStyle=brillo;g.fillRect(0,0,W,H);
+    // luna tras la bruma
+    var lx=ancho?W*.86:W*.8,ly=H*.2,lr=m*.045,halo=g.createRadialGradient(lx,ly,lr*.6,lx,ly,lr*5);halo.addColorStop(0,'rgba(235,226,204,.22)');halo.addColorStop(1,'rgba(235,226,204,0)');
+    g.fillStyle=halo;g.fillRect(lx-lr*5,ly-lr*5,lr*10,lr*10);g.beginPath();g.arc(lx,ly,lr,0,7);g.fillStyle='rgba(236,226,200,.82)';g.fill();
+    // estrellas
+    for(var i=0;i<120;i++){g.fillStyle='rgba(235,226,204,'+(R()*.5+.1)+')';g.fillRect(R()*W,R()*H*.45,R()*1.4*D+.4,R()*1.4*D+.4)}
+    // sierras
+    var lejos=cresta(R,H*.6,H*.05,5,null);rellena(g,lejos,'rgba(70,32,22,.85)');
+    var medio=cresta(R,H*.7,H*.03,3.4,{x:ancho?.78:.7,w:ancho?.16:.24,h:H*.14});
+    // Alcazaba sobre la colina
+    var col='#1d110c',hm=m*.028,al=Math.max(3,m*.008);
+    var a0=W*(ancho?.6:.42),a1=W*(ancho?.97:1.02);
+    muralla(g,medio,a0,a1,hm,al,col);
+    var torres=ancho?[.62,.68,.735,.87,.93]:[.46,.55,.63,.86,.95],tops=[];
+    torres.forEach(function(t){tops.push(torre(g,medio,W*t,m*.03,hm*1.7,al,col))});
+    var kx=W*(ancho?.8:.76),ktop=torre(g,medio,kx,m*.06,hm*3.6,al*1.2,col);
+    rellena(g,medio,'#24140e');
+    window._ventanas=[[kx-m*.012,ktop+hm*1.1],[kx+m*.01,ktop+hm*1.6],[W*torres[1],tops[1]+hm*.7],[W*torres[3],tops[3]+hm*.8]];
+    var cerca=cresta(R,H*.86,H*.035,2.2,null);rellena(g,cerca,'#120b08');
+    // pitas en primer plano
+    var s=m*(ancho?.13:.16);pita(g,W*(ancho?.1:.14),yEn(cerca,W*(ancho?.1:.14))+s*.1,s,'#0b0705');pita(g,W*(ancho?.27:.9),yEn(cerca,W*(ancho?.27:.9))+s*.12,s*.62,'#0b0705');
+    // humo y brasas
+    humo=[];for(i=0;i<7;i++)humo.push({x:R()*W,y:H*(.35+R()*.45),r:m*(.25+R()*.3),v:(R()*.15+.05)*D,a:.035+R()*.04});
+    brasas=[];var n=W/D<640?38:80;for(i=0;i<n;i++)brasas.push(nueva(true));
+    dibuja(0)}
+  function nueva(primera){var cx=W*(W>H?.72:.6);return{x:cx+(Math.random()-.5)*W*.9,y:primera?Math.random()*H:H+10,vy:-(Math.random()*.7+.3)*D,f:Math.random()*6,s:(Math.random()*1.6+.6)*D,t:Math.random()*Math.PI*2}}
+  function dibuja(t){
+    if(!fondo||!fondo.width)return;
+    ctx.drawImage(fondo,0,0);
+    // ventanas encendidas que titilan
+    (window._ventanas||[]).forEach(function(v,i){var a=.55+.35*Math.sin(t*.002+i*1.7);ctx.fillStyle='rgba(255,176,90,'+a+')';ctx.fillRect(v[0],v[1],2.2*D,3.4*D)});
+    humo.forEach(function(h){if(!quieto){h.x+=h.v;if(h.x-h.r>W)h.x=-h.r}var g=ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.r);g.addColorStop(0,'rgba(120,95,80,'+h.a+')');g.addColorStop(1,'rgba(120,95,80,0)');ctx.fillStyle=g;ctx.fillRect(h.x-h.r,h.y-h.r,h.r*2,h.r*2)});
+    brasas.forEach(function(b,i){if(!quieto){b.y+=b.vy;b.t+=.02;b.x+=Math.sin(b.t+b.f)*.4*D;if(b.y<H*.15)brasas[i]=b=nueva(false)}
+      var a=Math.max(0,Math.min(1,(b.y-H*.15)/(H*.5)))*(.6+.4*Math.sin(t*.006+b.f*3));
+      ctx.fillStyle='rgba(255,140,60,'+a*.25+')';ctx.beginPath();ctx.arc(b.x,b.y,b.s*3,0,7);ctx.fill();
+      ctx.fillStyle='rgba(255,205,130,'+a+')';ctx.beginPath();ctx.arc(b.x,b.y,b.s,0,7);ctx.fill()})}
+  function bucle(t){if(vivo&&!document.hidden)dibuja(t);requestAnimationFrame(bucle)}
+  pinta();
+  if(!quieto)requestAnimationFrame(bucle);
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){vivo=e[0].isIntersecting}).observe(cv);
+  var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(pinta,150)});
+})();
+</script>
+</body>
+</html>
